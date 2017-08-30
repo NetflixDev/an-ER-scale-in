@@ -1,0 +1,36 @@
+{
+    "name": "Netflix Logo",
+    "type": "netflix-logo",
+    "tagName": "netflix-logo",
+    "version": 0.16,
+    "description": "Netflix Logo Animation",
+    "files": {
+        "js": [
+            "NetflixLogoComponent.js",
+            "NetflixLogoAnimation.js"
+        ]
+    },
+    "externalScripts": [
+        "https://s0.2mdn.net/ads/studio/cached_libs/createjs_2015.11.26_54e1c3722102182bb133912ad4442e19_min.js"
+    ],
+    "attributes": [{
+        "name": "duration",
+        "label": "Duration",
+        "type": "float",
+        "required": false,
+        "defaultValue": 2.75,
+        "description": "The duration of the logo animation in seconds"
+    }],
+    "events": [{
+        "name": "complete",
+        "label": "Complete",
+        "description": "Logo animation complete"
+    }],
+    "methods": [{
+        "name": "play",
+        "label": "Play",
+        "description": "Play logo animation",
+        "parameters": []
+    }],
+    "nestable": true
+}

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+echo ' > git-hook(pre-commit): start'
+
+# save version
+echo ' > git-hook(pre-commit): tracking branch/commit'
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+VERSION=$(git rev-parse --short HEAD)
+node lib/api.js --cmd track -v "[$BRANCH $VERSION]" --silence
+
+# want to make sure all src/ are built out to dist/ before committing
+echo ' > git-hook(pre-commit): publishing dist folder'
+node lib/api.js --cmd publish --silence
+
+if [ $? -eq 0 ]
+then
+	echo ''
+
+	# add changes to commit
+	echo ' > git-hook(pre-commit): adding to commit'
+	git add -A
+
+	# output status
+	git status
+	echo ' > git-hook(pre-commit): COMPLETE'
+	exit 0
+
+else
+	echo ' > git-hook(pre-commit): FAILED - cannot commit'
+	exit 1
+fi

@@ -1,5 +1,5 @@
 // GENERIC SOURCE TRACKER: wc-netflix-cta
-if (typeof module === 'undefined') {
+if (typeof module === "undefined") {
     module = {};
 }
 
@@ -21,7 +21,7 @@ module.exports = {
            "type": "string",
            "required": true,
            "defaultValue": "CTA",
-           "gwdSpecific": { 'important': true },
+           "gwdSpecific": { "important": true },
            "advanced": true
         }
     ]

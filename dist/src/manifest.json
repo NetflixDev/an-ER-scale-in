@@ -1,29 +1,30 @@
 {
-    "name": "Netflix CTA",
-    "type": "netflix-cta",
-    "tagName": "netflix-cta",
-    "version": 0.2,
-    "description": "Netflix CTA",
-    "files": {
-        "js": [
-            "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js",
-            "NetflixCtaComponent.js"
-        ]
-    },
-    "externalScripts": [
-    ],
-    "attributes": [
-        {
-            "name": "data-dynamic-key",
-            "label": "data-dynamic-key",
-            "type": "string",
-            "required": true,
-            "defaultValue": "CTA",
-            "gwdSpecific": { "important": true },
-            "advanced": true
-        }
-    ],
-    "events": [],
-    "methods": [],
-    "nestable": true
+  "name": "Netflix CTA",
+  "type": "netflix-cta",
+  "tagName": "netflix-cta",
+  "version": 0.2,
+  "description": "Netflix CTA",
+  "files": {
+    "js": [
+      "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js",
+      "NetflixCtaComponent.js"
+    ]
+  },
+  "externalScripts": [],
+  "attributes": [
+    {
+      "name": "data-dynamic-key",
+      "label": "data-dynamic-key",
+      "type": "string",
+      "required": true,
+      "defaultValue": "CTA",
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    }
+  ],
+  "events": [],
+  "methods": [],
+  "nestable": true
 }

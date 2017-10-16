@@ -124,8 +124,15 @@ if (document.registerElement) {
             enumerable: true
         },
 
+        preview: {
+            value: function() {
+                var event = new CustomEvent('WebComponentsReady');
+                window.dispatchEvent(event);
+            }
+        },
+
         text: {
-            value: function(text, size) {
+            value: function(text) {
                 this.copy.innerHTML = text || this.copy.innerHTML;
 
                 this.resize();

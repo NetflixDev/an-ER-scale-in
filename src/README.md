@@ -2,32 +2,34 @@
 
 ## Interface
 
-### Attributes
-- data-dynamic-key: property to bind dynamic text to.
-- (when using this component in GWD, the attribute becomes:
-    'bind-data-dynamic-key')
 ### Methods
-- text(text, size): 
-    * text to display
-    * size to render cta
-    
-- resize(w, h)
-    * resize cta based on width/height
+- _mouseover()_ : Call this to programmatically trigger the mouseover animation.
+- _mouseout()_ : Call this to programmatically trigger the mouseout animation.
+- _text()_ : Call this to set the CTA text.
+- _resize(size)_ : Call this to programmatically set the size of the button. It accepts a size parameter which is an Object with width and height keys.
 
-- mouseover
-    * action to perform on mouseover
-    
-- mouseout 
-    * action to perform on mouseout
+
 ### Events
+- _cta-click_ : This event is dipatched when a mouse click / tap is triggered on the component.
+
+
+### Attributes
+- _width_ : Width.
+- _height_ : Height.
+- _color-1_ : Primary fill color.
+- _color-2_ : Secondary fill/font color.
+- _font_ : Font family.
+- _data-dynamic-key_ : Dynaic data binding.
+- _text_ : Static copy when not dynamic.
+- _arrow_ : Enabled arrow.
+- _border_ : Border size.
 
 ## How to use
 
 #### GWD
   - Import netflix-cta.zip to the `Components` panel in the GWD UI.
   - Drag and drop the `Netflix CTA` component anywhere in your creative area. Set its width and height to the size required.
-  - Set 'bind-dynamic-key' to the key to pull the actual source from. 
-   
+  - If the monet component is included in the creative, you must add the CTA ID from the backup.json to the components `Dynamic binding` property to bind the dynamic text property to the component.
   
 ### Non-GWD
   - Use like any other web component with the interface as specified above.

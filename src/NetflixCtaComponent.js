@@ -1,286 +1,284 @@
-if (document.registerElement) {
-    var elType = 'netflix-cta';
+( function() {
 
-    var component = Object.create(HTMLElement.prototype, {
-        createdCallback: {
-            value: function() {
-                this.width = parseInt(this.getAttribute('width') || (this.offsetWidth || 109));
-                this.height = parseInt(this.getAttribute('height') || (this.offsetHeight || 28));
-                this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+	var COMPONENT_NAME = 'netflix-cta';
+	var PREFIX = 'mm-component';
 
-                this.dom = this;
+	var Utils = (function() {
+		function Utils() {}
+		Utils.createStyle = function(n, r, o) {
+			this.stylesheet = document.getElementById(COMPONENT_NAME + '-component-stylesheet');
+			if (!this.stylesheet) return;
+			this.styles = this.styles || [];
+			this.styles.push({e:n, s:r});
+			var stylesheet = '';
+			this.styles.forEach(function(row) {
+				stylesheet += COMPONENT_NAME + (o?'':' ') + row.e + '{' + row.s + '}\n';
+			});
+			this.stylesheet.innerHTML = stylesheet;
+		}
+		Utils.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+		Utils.createArrow = function() {
+	        var s = Math.floor(this.height / 3.3);
+	        TweenMax.set(this.arrow, {
+	            height: s
+	        });
+	        var i = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	        i.setAttribute("width", s + "px");
+	        i.setAttribute("height", s + "px");
+	        i.line = new Utils.svgIcon("line1", "M0,0 l" + s / 2 + "," + s / 2 + "l-" + s / 2 + "," + s / 2);
+	        i.line.setAttribute("fill", "none");
+	        i.line.setAttribute("stroke", this.data.color[1]);
+	        i.line.setAttribute("stroke-width", 2);
+	        i.appendChild(i.line);
+	        return i;
+		}
+		Utils.svgIcon =  function(id, path) {
+	        var i = document.createElementNS("http://www.w3.org/2000/svg", "path");
+	        i.setAttributeNS(null, "d", path);
+	        i.setAttribute("data-original", path);
+	        i.setAttribute("class", id || "");
+	        return i;
+	    };
+		return Utils;
+	})();
 
-                this.stylesheet = document.createElement('style');
-                this.stylesheet.type = 'text/css';
-                this.dom.appendChild(this.stylesheet);
 
-                this.data = {};
-                this.data.color = [this.getAttribute('color-1') || '#e50914', this.getAttribute('color-2') || '#ffffff'];
-                this.data.size = this.getAttribute('font-size') || 20;
-                this.data.font = (this.getAttribute('font') || 'proximanova-semibold') + ', Arial, sans-serif';
-                this.data.text = this.getAttribute('text');
+	( function() {
 
-                this.button = document.createElement('div');
-                this.button.className = 'button';
-                this.fill = document.createElement('div');
-                this.fill.className = 'fill';
-                this.copy = document.createElement('div');
-                this.copy.className = 'copy';
-                this.arrow = document.createElement('div');
-                this.arrow.className = 'arrow';
-                this.arrow.innerHTML = '›';
-                this.border = document.createElement('div');
-                this.border.className = 'border';
+		function style() {
+			Utils.createStyle('.button', 
+				'cursor: pointer;overflow: hidden;text-align: center;font-size:' + this.data.size + 'px; font-family: ' + this.data.font );
 
-                this.dom.appendChild(this.button);
-                this.button.appendChild(this.fill);
-                this.button.appendChild(this.copy);
+			Utils.createStyle('.button .fill', 
+				'width:100%;height:100%;transform-origin:top left;-webkit-transform-origin:top left;transform: scale(0, 1);-webkit-transform: scale(0, 1); transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);');
 
-                this.hasArrow = this.hasAttribute('arrow');
-                this.hasBorder = this.hasAttribute('border');
-                this.borderSize = this.getAttribute('border') || 1;
+			Utils.createStyle('.button .arrow', 
+				'position:absolute;text-align: right;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: translate(0%, -50%);transform: translate(0%, -50%);');
 
-                if (this.hasArrow) {
-                    this.button.appendChild(this.arrow);
-                    this.button.className += ' isArrow';
-                }
+			Utils.createStyle('.button .arrow svg', 
+				'position:absolute;right:4%;left:auto;top:0;');
 
-                if (this.hasBorder) {
-                    this.button.appendChild(this.border);
-                }
+			if (!Utils.isMobile) {
+				Utils.createStyle('.button:hover .fill', 
+					'transform: scale(1, 1); -webkit-transform: scale(1, 1);');
 
-                this._style();
+				Utils.createStyle('.button.hover .fill', 
+					'transform: scale(1, 1); -webkit-transform: scale(1, 1);');
 
-                this.button.addEventListener('click', this._onClick.bind(this));
+				Utils.createStyle('.button:hover .arrow', 
+					'color:' + this.data.color[0]);
 
-                var ctaComponent = this;
-                window.addEventListener(
-                    'WebComponentsReady',
-                    function() {
-                        var MonetComponent = document.querySelector('monet-gwd');
-                        var cta = 'WATCH NOW';
+				Utils.createStyle('.button.hover .arrow', 
+					'color:' + this.data.color[0]);
+				
+				Utils.createStyle('.button:hover .copy', 
+					'color:' + this.data.color[0]);
 
-                        if (MonetComponent) {
-                            MonetComponent.getMonetData().then(
-                                function(data) {
-                                    var d;
+				Utils.createStyle('.button.hover .copy', 
+					'color:' + this.data.color[0]);
+				
+				Utils.createStyle('.button.isArrow:hover .copy', 
+					'color:' + this.data.color[0]);
+			}
 
-                                    if (ctaComponent.getAttribute('bind-data-dynamic-key')) {
-                                        // GWD will add the path to the key, so get the last value which is the key
-                                        var tempArray = ctaComponent.getAttribute('bind-data-dynamic-key').split('.');
-                                        d = tempArray[tempArray.length - 1];
-                                    } else {
-                                        // handle dynamic key set manually
-                                        d = ctaComponent.getAttribute('data-dynamic-key') || 'CTA';
-                                    }
+			Utils.createStyle('.button .copy', 
+				'transform-origin: 0 0;white-space:nowrap;letter-spacing:1.5px; padding:4px 8%;transition: color .4s cubic-bezier(0.19, 1, 0.22, 1);color:' + this.data.color[1]);
+			
+			Utils.createStyle('.button .border', 
+				'-webkit-box-sizing: border-box;box-sizing: border-box;position: absolute;top: 0;left: 0;width:100%;height:100%;border:solid '+this.borderSize+'px ' + this.data.color[0]);
 
-                                    try {
-                                        cta = data.rootAssets['text.' + d].text;
-                                        ctaComponent.text(cta);
-                                        console.log('dynamic key [' + d + '] found in rootAssets');
-                                    } catch (e) {
-                                        console.error('Monet dynamic ID not found in JSON: ', d, 'trying backup');
+			Utils.createStyle('*', 
+				'position: absolute;top: 0;left: 0;');
 
-                                        MonetComponent.getBackupMonetData().then(
-                                            function(backupData) {
-                                                if (!backupData) {
-                                                    console.error(
-                                                        'No backupData found. Please check that your monet-gwd component has a `dynamic-feed-sheet-name` attribute'
-                                                    );
-                                                    return;
-                                                }
+			this.className += ' ' + PREFIX;
+			this.style.position = 'absolute';
+			this.button.style.backgroundColor = this.data.color[0];
+			this.fill.style.backgroundColor = this.data.color[1];
+		}
 
-                                                cta = backupData.rootAssets['text.' + d].text;
-                                                ctaComponent.text(cta);
-                                            },
-                                            function(error) {
-                                                console.error('Failed to load backup Monet data', error);
-                                            }
-                                        );
-                                    }
-                                },
-                                function(error) {
-                                    console.error('Failed to load Monet data', error);
-                                }
-                            );
-                        } else {
-                            setTimeout(this.text.bind(this), 10, cta);
-                        }
-                    }.bind(this)
-                );
-            },
-            enumerable: true
-        },
+		var component = Object.create(HTMLElement.prototype, {
 
-        attachedCallback: {
-            value: function() {
-                this.resize();
-            },
-            enumerable: true
-        },
+			createdCallback: {
+				value: function() {					
+				},
+	      		enumerable: true
+			},
 
-        attributeChangedCallback: {
-            value: function() {},
-            enumerable: true
-        },
+			attachedCallback: {
+				value: function() {
+					this.width = parseInt(this.getAttribute('width') || (this.offsetWidth || 109));
+					this.height = parseInt(this.getAttribute('height') || (this.offsetHeight || 28));
+					this.stylesheet = document.createElement('style');
+					this.stylesheet.id = COMPONENT_NAME + "-component-stylesheet";
+					this.stylesheet.type = 'text/css';
+					this.appendChild(this.stylesheet);
 
-        preview: {
-            value: function() {
-                var event = new CustomEvent('WebComponentsReady');
-                window.dispatchEvent(event);
-            }
-        },
+					this.data = {};
+					this.data.color = [this.getAttribute('color-1') || '#e50914', this.getAttribute('color-2') || '#ffffff'];
+					this.data.size = 20;
+					this.data.font = (this.getAttribute('font') || 'Netflix Sans') + ', Arial, sans-serif';
+					this.data.text = this.getAttribute('text');
 
-        text: {
-            value: function(text) {
-                this.copy.innerHTML = text || this.copy.innerHTML;
+					this.button = document.createElement('div');
+					this.button.className = 'button';
+					this.fill = document.createElement('div');
+					this.fill.className = 'fill';
+					this.copy = document.createElement('div');
+					this.copy.className = 'copy';
+					this.arrow = document.createElement('div');
+					this.arrow.className = 'arrow';
+					this.border = document.createElement('div');
+					this.border.className = 'border';
 
-                this.resize();
-            }
-        },
+					this.appendChild(this.button);
+					this.button.appendChild(this.fill);
+					this.button.appendChild(this.copy);
 
-        resize: {
-            value: function(w, h) {
-                var width = w || (this.getAttribute('width') || (this.offsetWidth || 109));
-                var height = h || (this.getAttribute('height') || (this.offsetHeight || 28));
+					this.hasArrow = this.hasAttribute('arrow');
+					this.hasBorder = this.hasAttribute('border');
+					this.borderSize = this.getAttribute('border') || 1;
 
-                this.button.style.width = this.style.width = width + 'px';
-                this.button.style.height = this.style.height = height + 'px';
-                this.copy.setAttribute('style', 'transform: scale(1);');
+					if (this.hasArrow) {
+						this.button.appendChild(this.arrow);
+						this.button.className += ' isArrow';
+					}
 
-                var bb = this.copy.getBoundingClientRect();
-                var bbb = this.button.getBoundingClientRect();
+					if (this.hasBorder) {
+						this.button.appendChild(this.border);
+					}
 
-                var widthTransform = bbb.width * 0.8 / bb.width;
-                var heightTransform = bbb.height * 0.8 / bb.height;
-                var value = widthTransform < heightTransform ? widthTransform : heightTransform;
-                var matrix = window.getComputedStyle(this.copy, null).getPropertyValue('transform');
-                this.copy.setAttribute('style', 'transform: scale(' + value.toFixed(3) + ');');
+					style.call(this);
 
-                var bb = this.copy.getBoundingClientRect();
-                var xp = Math.round(bbb.width / 2 - bb.width / 2);
-                var yp = Math.round(bbb.height / 2 - bb.height / 2);
-                var p = bbb.width - bb.width;
+					this.button.addEventListener('click', function() {
+						if (this.click) this.click();
+						c = document.createEvent("CustomEvent");
+						c.initCustomEvent("cta-click", !0, !0, "Netflix CTA Click");
+						this.dispatchEvent(c);
+					}.bind(this));
 
-                if (this.hasArrow) {
-                    xp -= p / 4;
-                    this.arrow.setAttribute('style', 'transform: scale(1);');
 
-                    var abb = this.arrow.getBoundingClientRect();
-                    var ht = bbb.height * 0.5 / abb.height;
-                    this.arrow.setAttribute('style', 'transform: scale(' + ht.toFixed(3) + ');');
+	                window.addEventListener('WebComponentsReady', function () {
+	                    var MonetComponent = document.querySelector('monet-integrator');
+	                    var cta = 'WATCH NOW';
 
-                    abb = this.arrow.getBoundingClientRect();
-                    var ax = p / 3;
-                    var ay = Math.round(bbb.height / 2 - abb.height / 2);
-                    this.arrow.setAttribute(
-                        'style',
-                        'transform: scale(' + ht.toFixed(3) + '); top: ' + (ay - 1) + 'px; right: ' + ax + 'px;'
-                    );
-                }
+	                    if (MonetComponent) {
+	                        MonetComponent.getMonetData().then(
+	                        	function(data){
+	                                var key = this.getAttribute('data-dynamic-key') || 'CTA';
+	                                var d = key;
+	                                if (d.split('.').length == 1) {
+	                                    d = 'rootAssets["text.' + d + '"].text';
+	                                }
+	                                try {
+	                                    cta = eval('data.' + d);
+		                                this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
+	                                    this.text(cta);
+	                                } catch(e) {
+	                                	Monet.logEvent('MONET_DATA_ERROR', { "details": "Netflix CTA Component error; Could not find data in rootAssets: "+'text.' + d, "stack":e});
 
-                this.copy.setAttribute(
-                    'style',
-                    'transform: translateZ(0) scale(' + value.toFixed(3) + '); left: ' + xp + 'px; top:' + yp + 'px;)'
-                );
-            }
-        },
+	                                    MonetComponent.getBackupMonetData().then(
+	                                    	function(backupData){
+                                				var ld = d;
+	                                            if (d.split('.').length == 1) {
+				                                    d = 'rootAssets["text.' + d + '"].text';
+				                                }
+	                                            cta = eval('backupData.' + d);
+	                                            this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
+	                                            this.text(cta);
+											}.bind(this),
+											function (error) {
+												Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
+											}
+										);
+	                                }
+								}.bind(this),
+								function (error) {
+	                                Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
+	                            }
+							);
+	                    } 
+	                }.bind(this));
+				},
+	      		enumerable: true
+			},
 
-        mouseover: {
-            value: function() {
-                if (!this.isMobile) {
-                    this.button.classList.add('hover');
-                }
-            }
-        },
+			attributeChangedCallback: {
+				value: function() {
+					this.resize();
+				},
+	      		enumerable: true
+			},
 
-        mouseout: {
-            value: function() {
-                if (!this.isMobile) {
-                    this.button.classList.remove('hover');
-                }
-            }
-        },
+			text: {
+				value: function(text, size) {
+					this.copy.innerHTML = text || this.copy.innerHTML;
+					this.resize();
+				}
+			},
 
-        _style: {
-            value: function() {
-                this._addStyle(
-                    '.button',
-                    'cursor: pointer;overflow: hidden;line-height: 40px;text-align: center;font-size:' +
-                        this.data.size +
-                        'px; font-family: ' +
-                        this.data.font
-                );
+			resize: {
+				value: function(w,h) {
+					var width = (w || (this.getAttribute('width') || (this.offsetWidth || 109)));
+					var height = (h || (this.getAttribute('height') || (this.offsetHeight || 28)));
+					
+					this.button.style.width = this.style.width = width + 'px';
+					this.button.style.height = this.style.height = height + 'px';
+				    this.copy.setAttribute("style", "transform: scale(1);");
+					
+					var bb = this.copy.getBoundingClientRect();
+					var bbb = this.button.getBoundingClientRect();
+					var pr = "8%";
 
-                this._addStyle(
-                    '.button .fill',
-                    'width:100%;height:100%;transform: translate(-100%, 0);-webkit-transform: translate(-100%, 0); transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);'
-                );
+					if (this.hasArrow) {
+				    	var s = bb.width / bbb.width;
+				    	pr = (s * 16) + "%";
+				    	this.copy.setAttribute("style", "padding-right: " + pr + ";padding-left: " + s * 16 + "%");
+						bb = this.copy.getBoundingClientRect();
+						bbb = this.button.getBoundingClientRect();
+					}
 
-                this._addStyle(
-                    '.button .arrow',
-                    'transform-origin: top right;top:0;left:auto;right:0;line-height:40px;font-size: 230% !important;margin-top:-1px;transition: color .4s cubic-bezier(0.19, 1, 0.22, 1);color:' +
-                        this.data.color[1]
-                );
+					var widthTransform = (bbb.width ) / bb.width;
+				    var heightTransform = (bbb.height ) / bb.height;
+				    var value = widthTransform < heightTransform ? widthTransform : heightTransform;
 
-                if (!this.isMobile) {
-                    this._addStyle('.button:hover .fill', 'transform: translate(0, 0); -webkit-transform: translate(0, 0);');
+				    
+				    var matrix = window.getComputedStyle(this.copy, null).getPropertyValue('transform')
+				    this.copy.setAttribute("style", "transform: scale(" + value.toFixed(3) + ");padding-right: " + pr);
 
-                    this._addStyle('.button.hover .fill', 'transform: translate(0, 0); -webkit-transform: translate(0, 0);');
+					var copyBounds = this.copy.getBoundingClientRect();
+					var xp = Math.ceil((copyBounds.width * .96) / 2 );
+					var yp = Math.ceil((copyBounds.height) / 2);
+					var p = bbb.width - copyBounds.width;
+					
+					this.height = height;
+					this.arrow.innerHTML = "";
+					this.arrow.appendChild(Utils.createArrow.call(this));
+				    this.copy.setAttribute("style", "backface-visibility: hidden; transform: translateZ(0) scale(" + value.toFixed(3) + ") translate(-50%,0); left: 50%;top:50%;margin-top:-" + yp + "px;padding-right: " + pr);
 
-                    this._addStyle('.button:hover .arrow', 'color:' + this.data.color[0]);
+				}
+			},
 
-                    this._addStyle('.button.hover .arrow', 'color:' + this.data.color[0]);
+			mouseover: {
+				value: function() {
+					if (!Utils.isMobile) {
+						this.button.classList.add('hover');
+					}
+    				this.arrow.querySelector("svg").line.setAttribute("stroke", this.data.color[0]);
+				}
+			},
 
-                    this._addStyle('.button:hover .copy', 'color:' + this.data.color[0]);
+			mouseout: {
+				value: function() {
+					if (!Utils.isMobile) {
+						this.button.classList.remove('hover');
+					}
+        			this.arrow.querySelector("svg").line.setAttribute("stroke", this.data.color[1]);
+				}
+			}
 
-                    this._addStyle('.button.hover .copy', 'color:' + this.data.color[0]);
-                }
+		});
 
-                this._addStyle(
-                    '.button .copy',
-                    'transform-origin: 0 0;white-space:nowrap;letter-spacing:1.5px;text-align:center;padding: 4px 8%;transition: color .4s cubic-bezier(0.19, 1, 0.22, 1);color:' +
-                        this.data.color[1]
-                );
+		document.registerElement(COMPONENT_NAME, { prototype: component });
+	})();
 
-                this._addStyle(
-                    '.button .border',
-                    '-webkit-box-sizing: border-box;box-sizing: border-box;position: absolute;top: 0;left: 0;width:100%;height:100%;border:solid ' +
-                        this.borderSize +
-                        'px ' +
-                        this.data.color[0]
-                );
-
-                this._addStyle('*', 'position: absolute;top: 0;left: 0;');
-
-                this.className += ' mm-netflix-cta';
-                this.style.position = 'absolute';
-                this.button.style.backgroundColor = this.data.color[0];
-                this.fill.style.backgroundColor = this.data.color[1];
-            }
-        },
-
-        _addStyle: {
-            value: function(n, r) {
-                this.styles = this.styles || [];
-                this.styles.push({ e: n, s: r });
-                var stylesheet = '';
-                this.styles.forEach(function(row) {
-                    stylesheet += elType + ' ' + row.e + '{' + row.s + '}\n';
-                });
-                this.stylesheet.innerHTML = stylesheet;
-            }
-        },
-
-        _onClick: {
-            value: function() {
-                if (this.click) this.click();
-                c = document.createEvent('CustomEvent');
-                c.initCustomEvent('cta-click', !0, !0, 'Netflix CTA Click');
-                this.dispatchEvent(c);
-            }
-        }
-    });
-
-    document.registerElement(elType, { prototype: component });
-}
+})();

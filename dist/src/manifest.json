@@ -1,30 +1,88 @@
 {
-  "name": "Netflix CTA",
-  "type": "netflix-cta",
-  "tagName": "netflix-cta",
-  "version": 0.2,
-  "description": "Netflix CTA",
-  "files": {
-    "js": [
-      "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js",
-      "NetflixCtaComponent.js"
-    ]
-  },
-  "externalScripts": [],
-  "attributes": [
-    {
-      "name": "data-dynamic-key",
-      "label": "data-dynamic-key",
-      "type": "string",
-      "required": true,
-      "defaultValue": "CTA",
-      "gwdSpecific": {
-        "important": true
-      },
-      "advanced": true
-    }
-  ],
-  "events": [],
-  "methods": [],
-  "nestable": true
+    "name": "Netflix CTA",
+    "type": "netflix-cta",
+    "tagName": "netflix-cta",
+    "version": 0.42,
+    "description": "Netflix branded CTA button.",
+    "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
+    "files": {
+        "js": [
+            "NetflixCtaComponent.js",
+            "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"
+        ]
+    },
+    "attributes": [{
+        "name": "color-1",
+        "label": "Primary Color",
+        "type": "color",
+        "required": true,
+        "defaultValue": "#e50914",
+        "description": "The color of the button."
+    }, {
+        "name": "color-2",
+        "label": "Secondary Color",
+        "type": "color",
+        "required": true,
+        "defaultValue": "#ffffff",
+        "description": "The color of the mouseover."
+    }, {
+        "name": "dynamic",
+        "label": "Dynamic ID",
+        "type": "string",
+        "required": false,
+        "description": "Monet dynamic data binding."
+    }, {
+        "name": "arrow",
+        "label": "Arrow",
+        "type": "boolean",
+        "required": false,
+        "description": "Set true to enable the arrow."
+    }, {
+        "name": "border",
+        "label": "Border",
+        "type": "number",
+        "required": false,
+        "description": "Set true to enable the border."
+    }],
+    
+    "events": [{
+        "name": "cta-click",
+        "label": "cta-click",
+        "description": "Click event"
+    }],
+
+    "methods": [{
+        "name": "text",
+        "label": "Set text",
+        "description": "Set the text of the CTA",
+        "parameters": [{
+            "name": "text",
+            "label": "Text",
+            "type": "string"
+        }]
+    }, {
+        "name": "resize",
+        "label": "Resize",
+        "description": "Resize the button",
+        "parameters": [{
+            "name": "width",
+            "label": "width",
+            "type": "number"
+        }, {
+            "name": "height",
+            "label": "height",
+            "type": "number"
+        }]
+    }, {
+        "name": "mouseover",
+        "label": "Mouseover",
+        "description": "Mouseover event",
+        "parameters": []
+    }, {
+        "name": "mouseout",
+        "label": "Mouseout",
+        "description": "Mouseout event",
+        "parameters": []
+    }],
+    "nestable": true
 }

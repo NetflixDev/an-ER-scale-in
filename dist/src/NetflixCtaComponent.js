@@ -274,6 +274,12 @@
 					}
         			this.arrow.querySelector("svg").line.setAttribute("stroke", this.data.color[1]);
 				}
+			},
+
+			preview: {
+				value: function() {
+					
+				}
 			}
 
 		});

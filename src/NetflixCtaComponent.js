@@ -278,7 +278,7 @@
 
 			preview: {
 				value: function() {
-					alert('hello world');
+					
 				}
 			}
 

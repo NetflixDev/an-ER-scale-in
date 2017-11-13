@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "CTA button",
   "scripts": {
+    "postinstall": "cd src/ && npm install",
     "init": "node lib/api.js --cmd install",
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
     "publish": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
@@ -33,7 +34,7 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1510368367167,
+    "updated": 1510614343590,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta"
   },

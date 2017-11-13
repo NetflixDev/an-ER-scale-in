@@ -1,7 +1,7 @@
 {
   "name": "wc-netflix-cta",
   "version": "1.0.0",
-  "description": "## Interface",
+  "description": "",
   "main": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "c20-netflix-package-default": "git://github.com/NetflixAdsEng/Xdev-pk-4.git"
+    "pk-netflix-utils": "git://github.com/NetflixAdsEng/pk-netflix-utils.git"
   }
 }

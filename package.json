@@ -34,9 +34,8 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1510691884480,
+    "updated": 1510691925515,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta"
-  },
-  "c20Init": true
+  }
 }

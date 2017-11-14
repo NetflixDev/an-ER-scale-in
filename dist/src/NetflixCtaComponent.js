@@ -1,4 +1,4 @@
-( function() {
+(function() {
 
 	var COMPONENT_NAME = 'netflix-cta';
 	var PREFIX = 'mm-component';
@@ -17,7 +17,7 @@
 			this.stylesheet.innerHTML = stylesheet;
 		}
 		Utils.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-		Utils.createArrow = function() {
+		Utils.createArrow = function(color) {
 	        var s = Math.floor(this.height / 3.3);
 	        TweenMax.set(this.arrow, {
 	            height: s
@@ -27,7 +27,7 @@
 	        i.setAttribute("height", s + "px");
 	        i.line = new Utils.svgIcon("line1", "M0,0 l" + s / 2 + "," + s / 2 + "l-" + s / 2 + "," + s / 2);
 	        i.line.setAttribute("fill", "none");
-	        i.line.setAttribute("stroke", this.data.color[1]);
+	        i.line.setAttribute("stroke", color || 0);
 	        i.line.setAttribute("stroke-width", 2);
 	        i.appendChild(i.line);
 	        return i;
@@ -43,7 +43,7 @@
 	})();
 
 
-	( function() {
+	(function() {
 
 		function style() {
 			Utils.createStyle('.button', 
@@ -99,62 +99,65 @@
 		var component = Object.create(HTMLElement.prototype, {
 
 			createdCallback: {
-				value: function() {					
+				value: function() {	
+					var T = this;
+					T.attached = false;	
+
+					T.stylesheet = document.createElement('style');
+					T.stylesheet.id = COMPONENT_NAME + "-component-stylesheet";
+					T.stylesheet.type = 'text/css';
+					T.appendChild(T.stylesheet);	
+
+					T.button = create('button', T);
+					T.fill = create('fill', T.button);
+					T.copy = create('copy', T.button);
+					T.arrow = create('arrow');
+					T.border = create('border');
+
+					function create(name, target) {
+						var elem = document.createElement('div');
+						elem.className = name;
+						if (target) {
+							target.appendChild(elem)
+						}
+						return elem;
+					}	
 				},
 	      		enumerable: true
 			},
 
 			attachedCallback: {
 				value: function() {
-					this.width = parseInt(this.getAttribute('width') || (this.offsetWidth || 109));
-					this.height = parseInt(this.getAttribute('height') || (this.offsetHeight || 28));
-					this.stylesheet = document.createElement('style');
-					this.stylesheet.id = COMPONENT_NAME + "-component-stylesheet";
-					this.stylesheet.type = 'text/css';
-					this.appendChild(this.stylesheet);
+					var T = this;
+					T.attached = true;
+					
+					T.data = {};
+					T.data.color = [T.getAttribute('color-1') || '#e50914', T.getAttribute('color-2') || '#ffffff'];
+					T.data.size = 20;
+					T.data.font = (T.getAttribute('font') || 'Netflix Sans') + ', Arial, sans-serif';
+					T.data.text = T.getAttribute('text');
+					
+					T.hasArrow = T.hasAttribute('arrow');
+					T.hasBorder = T.hasAttribute('border');
+					T.borderSize = T.getAttribute('border') || 1;
 
-					this.data = {};
-					this.data.color = [this.getAttribute('color-1') || '#e50914', this.getAttribute('color-2') || '#ffffff'];
-					this.data.size = 20;
-					this.data.font = (this.getAttribute('font') || 'Netflix Sans') + ', Arial, sans-serif';
-					this.data.text = this.getAttribute('text');
-
-					this.button = document.createElement('div');
-					this.button.className = 'button';
-					this.fill = document.createElement('div');
-					this.fill.className = 'fill';
-					this.copy = document.createElement('div');
-					this.copy.className = 'copy';
-					this.arrow = document.createElement('div');
-					this.arrow.className = 'arrow';
-					this.border = document.createElement('div');
-					this.border.className = 'border';
-
-					this.appendChild(this.button);
-					this.button.appendChild(this.fill);
-					this.button.appendChild(this.copy);
-
-					this.hasArrow = this.hasAttribute('arrow');
-					this.hasBorder = this.hasAttribute('border');
-					this.borderSize = this.getAttribute('border') || 1;
-
-					if (this.hasArrow) {
-						this.button.appendChild(this.arrow);
-						this.button.className += ' isArrow';
+					if (T.hasArrow) {
+						T.button.appendChild(T.arrow);
+						T.button.className += ' isArrow';
 					}
 
-					if (this.hasBorder) {
-						this.button.appendChild(this.border);
+					if (T.hasBorder) {
+						T.button.appendChild(T.border);
 					}
 
-					style.call(this);
+					style.call(T);
 
-					this.button.addEventListener('click', function() {
-						if (this.click) this.click();
+					T.button.addEventListener('click', function() {
+						if (T.click) T.click();
 						c = document.createEvent("CustomEvent");
 						c.initCustomEvent("cta-click", !0, !0, "Netflix CTA Click");
-						this.dispatchEvent(c);
-					}.bind(this));
+						T.dispatchEvent(c);
+					}.bind(T));
 
 
 	                window.addEventListener('WebComponentsReady', function () {
@@ -164,15 +167,15 @@
 	                    if (MonetComponent) {
 	                        MonetComponent.getMonetData().then(
 	                        	function(data){
-	                                var key = this.getAttribute('data-dynamic-key') || 'CTA';
+	                                var key = T.getAttribute('data-dynamic-key') || 'CTA';
 	                                var d = key;
 	                                if (d.split('.').length == 1) {
 	                                    d = 'rootAssets["text.' + d + '"].text';
 	                                }
 	                                try {
 	                                    cta = eval('data.' + d);
-		                                this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
-	                                    this.text(cta);
+		                                T.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
+	                                    T.text(cta);
 	                                } catch(e) {
 	                                	Monet.logEvent('MONET_DATA_ERROR', { "details": "Netflix CTA Component error; Could not find data in rootAssets: "+'text.' + d, "stack":e});
 
@@ -183,28 +186,28 @@
 				                                    d = 'rootAssets["text.' + d + '"].text';
 				                                }
 	                                            cta = eval('backupData.' + d);
-	                                            this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
-	                                            this.text(cta);
-											}.bind(this),
+	                                            T.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
+	                                            T.text(cta);
+											}.bind(T),
 											function (error) {
 												Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
 											}
 										);
 	                                }
-								}.bind(this),
+								}.bind(T),
 								function (error) {
 	                                Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
 	                            }
 							);
 	                    } 
-	                }.bind(this));
+	                }.bind(T));
 				},
 	      		enumerable: true
 			},
 
 			attributeChangedCallback: {
 				value: function() {
-					this.resize();
+					if (this.attached) this.resize();
 				},
 	      		enumerable: true
 			},
@@ -219,8 +222,8 @@
 			resize: {
 				value: function(w,h) {
 					var width = (w || (this.getAttribute('width') || (this.offsetWidth || 109)));
-					var height = (h || (this.getAttribute('height') || (this.offsetHeight || 28)));
-					
+					var height = (h || (this.getAttribute('height') || (this.offsetHeight || 28)));		
+
 					this.button.style.width = this.style.width = width + 'px';
 					this.button.style.height = this.style.height = height + 'px';
 				    this.copy.setAttribute("style", "transform: scale(1);");
@@ -251,8 +254,10 @@
 					var p = bbb.width - copyBounds.width;
 					
 					this.height = height;
-					this.arrow.innerHTML = "";
-					this.arrow.appendChild(Utils.createArrow.call(this));
+					if (this.attached){
+						this.arrow.innerHTML = "";
+						this.arrow.appendChild(Utils.createArrow.call(this, this.data.color[1]));
+					}
 				    this.copy.setAttribute("style", "backface-visibility: hidden; transform: translateZ(0) scale(" + value.toFixed(3) + ") translate(-50%,0); left: 50%;top:50%;margin-top:-" + yp + "px;padding-right: " + pr);
 
 				}

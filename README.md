@@ -1,46 +1,35 @@
-# Netflix Web Component
+# Netflix Generic Source - WEB COMPONENT
 
-## Intro
-Web Components is a flexible, long-standing HTML/CSS/JS framework that is in a good position to become a browser standard.
 
-This project is a scaffold for src -> dist -> origin/master. Please go to the [./src folder README](./src) for more information about the distinct qualities of this component:
- - its "context"
- - base files / functionalities / interface / compatibilities
- - authoring strategies
- - etc.
+## Overview
+Generic Sources are the building blocks of Monet Containers. There are several types:
+ - __Build Templates__
+ - __Web Components__
+ - __Packages__
 
-Netflix uses the Web Components pattern for its ability to be implemented in a variety of ways: They 
-are supported by Google Web Designer, and, with polyfills and some tooling, they can be utilized in agency frameworks.
+Web Components are a flexible, long-standing HTML/CSS/JS framework that is in a good position to become a browser standard. Netflix 
+uses the Web Components pattern for its ability to be implemented in a variety of ways: They are supported by Google Web Designer, 
+and, with polyfills and some tooling, they can be utilized in agency frameworks.
 
 This scaffold provides tools that make it easier to author, test, maintain, share, and migrate Web Components.
 
 
 
-## GWD Web Components
-The GWD spec for authoring Web Components begins here [Using Custom Components](https://support.google.com/webdesigner/topic/6175722?hl=en&ref_topic=3181232).
-There is a decent amount of flexibility in regard to how you author your components, but the `manifest.json` is critical for our purposes.
-
-The GWD `manifest.json` enables:
- - the GWD application to surface the specified web-component UI to users
- - this package's `./lib/api` to automatically build browser-ready versions of the web-component
-
-
-
-
 
 ## Installation
-`npm run init`
+`npm install` && `npm run init`
+ - attaches the GS-tracker to GWD-manifest
+ - git hooks are installed from `./hooks` to `./.git/hooks`. These ensure that the `./dist` folder is up-to-date.
+ - if there is a `./lib/package.json`, then it will also be installed. This allows authors of this scaffold to bundle additional infrastructure, if needed.
  - installs the testing framework. For more information, see [NetflixAdsEng/da-testing-framework](https://github.com/NetflixAdsEng/da-testing-framework)
- - if there is a `./lib/package.json`, then it will be installed
- - git hooks are installed from `./hooks` to `./.git/hooks/`
 
 
 
 
-## Monet Compatibility
+## Monet/C20 Compatibility
 
 #### GENERIC SOURCE TRACKING
-You will notice a file in your `./src/` folder that looks like:
+You will notice a file in your `./src` folder that looks like:
 
 `c73f6129-5748-4609-ae15-a7b0ce6042af.js`
 
@@ -56,17 +45,26 @@ This switch is here: `package.json -> genericSource.state`. It's options are:
  - `disabled`: Disabled state, the component will __not__ appear in Monet
 
 
+#### GWD Web Components
+The GWD spec for authoring Web Components begins here [Using Custom Components](https://support.google.com/webdesigner/topic/6175722?hl=en&ref_topic=3181232).
+The `manifest.json` is critical for our purposes.
+
+The GWD `manifest.json` enables:
+ - the GWD application to surface the specified web-component UI to users
+ - this package's `./lib/api` to automatically build browser-ready versions of the web-component
+
+
 
 
 ## Development
 
-#### SRC
-All of your dev should happen in `./src/` folder. Please refer to the evolving standards surrounding Web Components.
+### SRC
+All of your dev should happen in `./src` folder. Please refer to the evolving standards surrounding Web Components.
 
 The required file is `manifest.json` -- that describes the public features of your component. Detailed information 
 about the manifest format is here [Component JSON manifest](https://support.google.com/webdesigner/answer/6172389?hl=en).
 
-Otherwise, you may own the `./src/` folder. Add whatever scaffolding & build-dependencies you need to dev/build/maintain this component. 
+Otherwise, you may own the `./src` folder. Add whatever scaffolding & build-dependencies you need to dev/build/maintain this component. 
 
 ###### LOCALHOST
 `npm run localhost`
@@ -80,18 +78,23 @@ The `.src/` has it's own `README.md`. Please make use of it to communicate compo
 
 
 
-#### BUILD
-Make it possible to run your Web Component in a browser:
+### BUILD
+You must use `./src/manifest.json` to declare component dependencies. The format can be found here: [Component JSON manifest](https://support.google.com/webdesigner/answer/6172389?hl=en).
+
+The component-API will use `./src/manifest.json` to automatically build a number of helper files (see below).
 
 `npm run build`
  - creates a Web Component "link file" (ex: `component_link.html`) from a GWD manifest.json
- - creates a Web Component "preview file" (ex: `component_preview.html`), which can run in a browser, load, and play the "link file"
+ - creates a Web Component "preview file" (ex: `index.html`), which can run in a browser, load, and play the "link file"
+ - creates `./index.js` which enables this component to be added as an NPM-style dependency
 
 
-#### DISTRIBUTION
+### PUBLISH
 `npm run publish`
- - runs `npm run build`
- - creates a zip in `./dist/` that can be imported as a Component in GWD
+ - copies `./src` to `./dist/src`
+ - creates a zip in `./dist/gwd` that can be imported as a Component in GWD
+ - marks the component as `published` in C20
+
 
 
 
@@ -99,11 +102,8 @@ Make it possible to run your Web Component in a browser:
 
 
 ## Testing
-Several choices here, depending on your needs:
-
-#### LOCALHOST
-See above. Once you have a localhost running, you can browse to the particular test you'd like to run. Open your
-browser console in order to see the test results.
+`npm run install-testing-framework`
+ - this will install all of the infrastructure necessary to run automated tests on these components.
 
 #### SELENIUM
 Selenium can run any number of tests on any installed browsers. When run from the CLI, it will 
@@ -112,7 +112,7 @@ automatically launch Chrome and execute until all the tests are complete.
 `npm run test`   
  - build all of the preview files.
  - generate a test suite for Monet requirements (ex: `boilerplate_tests.html`).
- - launch Selenium and run everything in the `test/` folder on every browser specified (and installed).
+ - launch Selenium and run everything in the `./test` folder on every browser specified (and installed).
 
  To stop the testing process, press SPACE-BAR. This will give the application the proper signal
  to clean-up after itself.
@@ -127,4 +127,18 @@ automatically launch Chrome and execute until all the tests are complete.
 
 
 
+
+
+
+
+## Note about this Scaffold
+This repo was generated by Container 2.0 using [NetflixAdsEng/da-generic-source-scaffolding](https://github.com/NetflixAdsEng/da-generic-source-scaffolding). 
+
+To affect the initial state of these repos (for example, this README), please review that project and commit accordingly.
+
+This project scaffolds a build process for src -> dist -> origin/master. Please go to the [./src folder README](./src) for more information about the distinct qualities of this component:
+ - its "context"
+ - base files / functionalities / interface / compatibilities
+ - authoring strategies
+ - etc.
 

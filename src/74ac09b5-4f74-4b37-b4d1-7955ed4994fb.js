@@ -10,21 +10,9 @@ module.exports = {
   "type": "web_components",
   "context": "Default",
   "state": "published",
-  "updated": 15041357528383,
+  "updated": 1510873577948,
   "full_name": "NetflixAdsEng/wc-netflix-cta",
   "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
-  "version": "[feature/dependencies 2ac99f3]",
-  "attributes": [
-    {
-      "name": "data-dynamic-key",
-      "label": "data-dynamic-key",
-      "type": "string",
-      "required": true,
-      "defaultValue": "CTA",
-      "gwdSpecific": {
-        "important": true
-      },
-      "advanced": true
-    }
-  ]
+  "username": "gmcdev",
+  "version": "[feature/dependencies 49f835b]"
 };

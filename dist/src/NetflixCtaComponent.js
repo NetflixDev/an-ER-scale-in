@@ -1,5 +1,4 @@
 (function() {
-
 	var COMPONENT_NAME = 'netflix-cta';
 	var PREFIX = 'mm-component';
 
@@ -18,27 +17,27 @@
 		}
 		Utils.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 		Utils.createArrow = function(color) {
-	        var s = Math.floor(this.height / 3.3);
-	        TweenMax.set(this.arrow, {
-	            height: s
-	        });
-	        var i = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-	        i.setAttribute("width", s + "px");
-	        i.setAttribute("height", s + "px");
-	        i.line = new Utils.svgIcon("line1", "M0,0 l" + s / 2 + "," + s / 2 + "l-" + s / 2 + "," + s / 2);
-	        i.line.setAttribute("fill", "none");
-	        i.line.setAttribute("stroke", color || 0);
-	        i.line.setAttribute("stroke-width", 2);
-	        i.appendChild(i.line);
-	        return i;
+			var s = Math.floor(this.height / 3.3);
+			TweenMax.set(this.arrow, {
+				height: s
+			});
+			var i = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+			i.setAttribute("width", s + "px");
+			i.setAttribute("height", s + "px");
+			i.line = new Utils.svgIcon("line1", "M0,0 l" + s / 2 + "," + s / 2 + "l-" + s / 2 + "," + s / 2);
+			i.line.setAttribute("fill", "none");
+			i.line.setAttribute("stroke", color || 0);
+			i.line.setAttribute("stroke-width", 2);
+			i.appendChild(i.line);
+			return i;
 		}
 		Utils.svgIcon =  function(id, path) {
-	        var i = document.createElementNS("http://www.w3.org/2000/svg", "path");
-	        i.setAttributeNS(null, "d", path);
-	        i.setAttribute("data-original", path);
-	        i.setAttribute("class", id || "");
-	        return i;
-	    };
+			var i = document.createElementNS("http://www.w3.org/2000/svg", "path");
+			i.setAttributeNS(null, "d", path);
+			i.setAttribute("data-original", path);
+			i.setAttribute("class", id || "");
+			return i;
+		};
 		return Utils;
 	})();
 
@@ -123,7 +122,7 @@
 						return elem;
 					}	
 				},
-	      		enumerable: true
+				enumerable: true
 			},
 
 			attachedCallback: {
@@ -160,56 +159,63 @@
 					}.bind(T));
 
 
-	                window.addEventListener('WebComponentsReady', function () {
-	                    var MonetComponent = document.querySelector('monet-integrator');
-	                    var cta = 'WATCH NOW';
+					window.addEventListener('WebComponentsReady', handleReady);
+					window.addEventListener('monetDataReady', handleReady);
 
-	                    if (MonetComponent) {
-	                        MonetComponent.getMonetData().then(
-	                        	function(data){
-	                                var key = T.getAttribute('data-dynamic-key') || 'CTA';
-	                                var d = key;
-	                                if (d.split('.').length == 1) {
-	                                    d = 'rootAssets["text.' + d + '"].text';
-	                                }
-	                                try {
-	                                    cta = eval('data.' + d);
-		                                T.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
-	                                    T.text(cta);
-	                                } catch(e) {
-	                                	Monet.logEvent('MONET_DATA_ERROR', { "details": "Netflix CTA Component error; Could not find data in rootAssets: "+'text.' + d, "stack":e});
+					function handleReady(event) {
+						var MonetComponent = document.querySelector('monet-integrator');
+						var cta = 'WATCH NOW';
 
-	                                    MonetComponent.getBackupMonetData().then(
-	                                    	function(backupData){
-                                				var ld = d;
-	                                            if (d.split('.').length == 1) {
-				                                    d = 'rootAssets["text.' + d + '"].text';
-				                                }
-	                                            cta = eval('backupData.' + d);
-	                                            T.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
-	                                            T.text(cta);
+						if (MonetComponent) {
+							MonetComponent.getMonetData().then(
+								function(data){
+									var key = T.getAttribute('data-dynamic-key') || 'CTA';
+									var d = key;
+									if (d.split('.').length == 1) {
+										d = 'rootAssets["text.' + d + '"].text';
+									}
+									try {
+										cta = eval('data.' + d);
+										T.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
+										T.text(cta);
+
+									   T.dispatchEvent(new CustomEvent('ready'))
+									} catch(e) {
+										Monet.logEvent('MONET_DATA_ERROR', { "details": "Netflix CTA Component error; Could not find data in rootAssets: "+'text.' + d, "stack":e});
+
+										MonetComponent.getBackupMonetData().then(
+											function(backupData){
+												var ld = d;
+												if (d.split('.').length == 1) {
+													d = 'rootAssets["text.' + d + '"].text';
+												}
+												cta = eval('backupData.' + d);
+												T.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
+												T.text(cta);
+
+												T.dispatchEvent(new CustomEvent('ready'))
 											}.bind(T),
 											function (error) {
 												Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
 											}
 										);
-	                                }
-								}.bind(T),
+									}
+								},
 								function (error) {
-	                                Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
-	                            }
+									Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
+								}
 							);
-	                    } 
-	                }.bind(T));
+						} 
+					}
 				},
-	      		enumerable: true
+				enumerable: true
 			},
 
 			attributeChangedCallback: {
 				value: function() {
 					if (this.attached) this.resize();
 				},
-	      		enumerable: true
+				enumerable: true
 			},
 
 			text: {
@@ -226,27 +232,27 @@
 
 					this.button.style.width = this.style.width = width + 'px';
 					this.button.style.height = this.style.height = height + 'px';
-				    this.copy.setAttribute("style", "transform: scale(1);");
+					this.copy.setAttribute("style", "transform: scale(1);");
 					
 					var bb = this.copy.getBoundingClientRect();
 					var bbb = this.button.getBoundingClientRect();
 					var pr = "8%";
 
 					if (this.hasArrow) {
-				    	var s = bb.width / bbb.width;
-				    	pr = (s * 16) + "%";
-				    	this.copy.setAttribute("style", "padding-right: " + pr + ";padding-left: " + s * 16 + "%");
+						var s = bb.width / bbb.width;
+						pr = (s * 16) + "%";
+						this.copy.setAttribute("style", "padding-right: " + pr + ";padding-left: " + s * 16 + "%");
 						bb = this.copy.getBoundingClientRect();
 						bbb = this.button.getBoundingClientRect();
 					}
 
 					var widthTransform = (bbb.width ) / bb.width;
-				    var heightTransform = (bbb.height ) / bb.height;
-				    var value = widthTransform < heightTransform ? widthTransform : heightTransform;
+					var heightTransform = (bbb.height ) / bb.height;
+					var value = widthTransform < heightTransform ? widthTransform : heightTransform;
 
-				    
-				    var matrix = window.getComputedStyle(this.copy, null).getPropertyValue('transform')
-				    this.copy.setAttribute("style", "transform: scale(" + value.toFixed(3) + ");padding-right: " + pr);
+					
+					var matrix = window.getComputedStyle(this.copy, null).getPropertyValue('transform')
+					this.copy.setAttribute("style", "transform: scale(" + value.toFixed(3) + ");padding-right: " + pr);
 
 					var copyBounds = this.copy.getBoundingClientRect();
 					var xp = Math.ceil((copyBounds.width * .96) / 2 );
@@ -258,7 +264,7 @@
 						this.arrow.innerHTML = "";
 						this.arrow.appendChild(Utils.createArrow.call(this, this.data.color[1]));
 					}
-				    this.copy.setAttribute("style", "backface-visibility: hidden; transform: translateZ(0) scale(" + value.toFixed(3) + ") translate(-50%,0); left: 50%;top:50%;margin-top:-" + yp + "px;padding-right: " + pr);
+					this.copy.setAttribute("style", "backface-visibility: hidden; transform: translateZ(0) scale(" + value.toFixed(3) + ") translate(-50%,0); left: 50%;top:50%;margin-top:-" + yp + "px;padding-right: " + pr);
 
 				}
 			},
@@ -268,7 +274,7 @@
 					if (!Utils.isMobile) {
 						this.button.classList.add('hover');
 					}
-    				this.arrow.querySelector("svg").line.setAttribute("stroke", this.data.color[0]);
+					this.arrow.querySelector("svg").line.setAttribute("stroke", this.data.color[0]);
 				}
 			},
 
@@ -277,7 +283,7 @@
 					if (!Utils.isMobile) {
 						this.button.classList.remove('hover');
 					}
-        			this.arrow.querySelector("svg").line.setAttribute("stroke", this.data.color[1]);
+					this.arrow.querySelector("svg").line.setAttribute("stroke", this.data.color[1]);
 				}
 			},
 

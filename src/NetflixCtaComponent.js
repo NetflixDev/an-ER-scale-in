@@ -1,5 +1,4 @@
 (function() {
-
 	var COMPONENT_NAME = 'netflix-cta';
 	var PREFIX = 'mm-component';
 

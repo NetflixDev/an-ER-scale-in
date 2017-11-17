@@ -1,4 +1,4 @@
-import './src/node_modules/pk-netflix-utils/src/main.js'
+import './src/node_modules/pk-component-utils/src/main.js'
 import './src/node_modules/pk-component-assets/src/main.js'
 import './src/NetflixCtaComponent.js'
 import './src/74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js'

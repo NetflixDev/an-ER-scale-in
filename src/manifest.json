@@ -7,8 +7,9 @@
   "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
   "files": {
     "js": [
-      "node_modules/pk-component-utils/src/main.js",
-      "node_modules/pk-component-assets/src/main.js",
+      "node_modules/pk-component-utils/src/createStyle.js",
+      "node_modules/pk-component-utils/src/DeviceUtils.js",
+      "node_modules/pk-component-utils/src/SvgIcon.js"
       "NetflixCtaComponent.js",
       "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"
     ]

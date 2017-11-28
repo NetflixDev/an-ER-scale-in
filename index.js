@@ -1,5 +1,5 @@
 import './src/node_modules/pk-component-utils/src/createStyle.js'
-import './src/node_modules/pk-component-utils/src/DeviceUtils.js'
+import './src/node_modules/pk-component-utils/src/deviceUtils.js'
 import './src/node_modules/pk-component-utils/src/SvgIcon.js'
 import './src/NetflixCtaComponent.js'
 import './src/74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js'

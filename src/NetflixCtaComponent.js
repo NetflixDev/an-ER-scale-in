@@ -59,6 +59,11 @@
 				'position:absolute;right:4%;left:auto;top:0;');
 
 			if (!Utils.isMobile) {
+				Utils.createStyle('.button:hover .bgImageHover', 
+					'width:100% !important;');
+				Utils.createStyle('.button.hover .bgImageHover', 
+					'width:100% !important;');
+
 				Utils.createStyle('.button:hover .fill', 
 					'transform: scale(1, 1); -webkit-transform: scale(1, 1);');
 
@@ -92,6 +97,7 @@
 
 			this.className += ' ' + PREFIX;
 			this.style.position = 'absolute';
+			if (!this.bgImgContainer)
 			this.button.style.backgroundColor = this.data.color[0];
 			this.fill.style.backgroundColor = this.data.color[1];
 		}
@@ -130,8 +136,34 @@
 					this.border = document.createElement('div');
 					this.border.className = 'border';
 
+					var bgImg = this.getAttribute('background-image');
+					if (bgImg) {
+						this.bgImgContainer = document.createElement("div");
+						this.bgImgContainer.className = "bgImage";
+						var img = new Image();
+						img.src = bgImg;
+						this.bgImgContainer.appendChild(img);
+						this.button.appendChild(this.bgImgContainer);
+						this.bgImgContainer.setAttribute("style", "position: absolute; top:0;left:0;");
+						img.setAttribute("style", "min-width:"+this.width+"px;");
+					}
+
 					this.appendChild(this.button);
 					this.button.appendChild(this.fill);
+
+					var bgImgHover = this.getAttribute('background-image-hover');
+					if (bgImgHover) {
+						this.bgImgContainerHover = document.createElement("div");
+						this.bgImgContainerHover.className = "bgImageHover";
+						var imgHover = new Image();
+						imgHover.src = bgImgHover;
+						this.bgImgContainerHover.appendChild(imgHover);
+						this.button.appendChild(this.bgImgContainerHover);
+						this.bgImgContainerHover.setAttribute("style", "position: absolute; top:0;left:0;width:0%;overflow:hidden;height:"+this.height+"px; transition: width .4s cubic-bezier(0.19, 1, 0.22, 1);");
+						imgHover.setAttribute("style", "min-width:"+this.width+"px;");
+						this.fill.setAttribute("style", "display:none;")
+					}
+
 					this.button.appendChild(this.copy);
 
 					this.hasArrow = this.hasAttribute('arrow');
@@ -273,6 +305,11 @@
 						this.button.classList.remove('hover');
 					}
         			this.arrow.querySelector("svg").line.setAttribute("stroke", this.data.color[1]);
+				}
+			},
+
+			preview: {
+				value: function() {
 				}
 			}
 

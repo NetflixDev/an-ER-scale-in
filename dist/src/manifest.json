@@ -2,7 +2,7 @@
     "name": "Netflix CTA",
     "type": "netflix-cta",
     "tagName": "netflix-cta",
-    "version": 0.42,
+    "version": 0.43,
     "description": "Netflix branded CTA button.",
     "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
     "files": {
@@ -43,6 +43,18 @@
         "type": "number",
         "required": false,
         "description": "Set true to enable the border."
+    }, {
+        "name": "background-image",
+        "label": "Background image",
+        "type": "string",
+        "required": false,
+        "description": "Set a background image."
+    }, {
+        "name": "background-image-hover",
+        "label": "Background image hover",
+        "type": "string",
+        "required": false,
+        "description": "Set a background image for rollover state."
     }],
     
     "events": [{

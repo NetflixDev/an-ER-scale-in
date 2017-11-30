@@ -95,69 +95,72 @@
 				this.hasBorder = this.hasAttribute('border');
 				this.borderSize = this.getAttribute('border') || 1;
 
-					if (this.hasArrow) {
-						this.button.appendChild(this.arrow);
-						this.button.className += ' isArrow';
-					}
+				if (this.hasArrow) {
+					this.button.appendChild(this.arrow);
+					this.button.className += ' isArrow';
+				}
 
-					if (this.hasBorder) {
-						this.button.appendChild(this.border);
-					}
+				if (this.hasBorder) {
+					this.button.appendChild(this.border);
+				}
 
 				style.call(this);
 
-					this.button.addEventListener('click', function() {
-						if (this.click) this.click();
-						c = document.createEvent("CustomEvent");
-						c.initCustomEvent("cta-click", !0, !0, "Netflix CTA Click");
-						this.dispatchEvent(c);
-					}.bind(this));
-
-				window.addEventListener('monetDataReady', function(event) {
-					var MonetComponent = document.querySelector('monet-integrator');
-					var cta = 'WATCH NOW';
-
-					if (MonetComponent) {
-						MonetComponent.getMonetData().then(
-							function(data){
-								var key = this.getAttribute('data-dynamic-key') || 'CTA';
-								var d = key;
-								if (d.split('.').length == 1) {
-									d = 'rootAssets["text.' + d + '"].text';
-								}
-								try {
-									cta = eval('data.' + d);
-									this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
-									this.text(cta);
-
-									this.dispatchEvent(new CustomEvent('ready'))
-								} catch(e) {
-									Monet.logEvent('MONET_DATA_ERROR', { "details": "Netflix CTA Component error; Could not find data in rootAssets: "+'text.' + d, "stack":e});
-
-									MonetComponent.getBackupMonetData().then(
-										function(backupData){
-											var ld = d;
-											if (d.split('.').length == 1) {
-												d = 'rootAssets["text.' + d + '"].text';
-											}
-											cta = eval('backupData.' + d);
-											this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
-											this.text(cta);
-
-											this.dispatchEvent(new CustomEvent('ready'))
-										}.bind(this),
-										function (error) {
-											Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
-										}
-									);
-								}
-							}.bind(this),
-							function (error) {
-								Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
-							}
-						);
-					} 
+				this.button.addEventListener('click', function() {
+					if (this.click) this.click();
+					c = document.createEvent("CustomEvent");
+					c.initCustomEvent("cta-click", !0, !0, "Netflix CTA Click");
+					this.dispatchEvent(c);
 				}.bind(this));
+
+				var cta = 'WATCH NOW';
+
+				var MonetComponent = document.querySelector('monet-integrator');
+				if (MonetComponent) {
+					MonetComponent.register(this)
+					MonetComponent.getMonetData().then(
+						function(data){
+							var key = this.getAttribute('data-dynamic-key') || 'CTA';
+							console.log('CTA - key:', key)
+							var d = key;
+							if (d.split('.').length == 1) {
+								console.log('CTA - if split length == 1:', d.split('.'))
+								d = 'rootAssets["text.' + d + '"].text';
+							}
+							try {
+								console.log('CTA - d:', d)
+								cta = eval('data.' + d);
+								console.log('CTA - cta:', cta)
+								this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
+								this.text(cta);
+								this.dispatchEvent(new CustomEvent('ready'))
+
+							} catch(e) {
+								Monet.logEvent('MONET_DATA_ERROR', { "details": "Netflix CTA Component error; Could not find data in rootAssets: "+'text.' + d, "stack":e});
+
+								MonetComponent.getBackupMonetData().then(
+									function(backupData){
+										var ld = d;
+										if (d.split('.').length == 1) {
+											d = 'rootAssets["text.' + d + '"].text';
+										}
+										cta = eval('backupData.' + d);
+										this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
+										this.text(cta);
+
+										this.dispatchEvent(new CustomEvent('ready'))
+									}.bind(this),
+									function (error) {
+										Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
+									}
+								);
+							}
+						}.bind(this),
+						function (error) {
+							Monet.logEvent('MONET_DATA_ERROR', { "details": "Failed to load backup Monet data", "stack": error});
+						}
+					);
+				} 
 			},
 			enumerable: true
 		},
@@ -189,13 +192,13 @@
 				var bbb = this.button.getBoundingClientRect();
 				var pr = "8%";
 
-					if (this.hasArrow) {
-				    	var s = bb.width / bbb.width;
-				    	pr = (s * 16) + "%";
-				    	this.copy.setAttribute("style", "padding-right: " + pr + ";padding-left: " + s * 16 + "%");
-						bb = this.copy.getBoundingClientRect();
-						bbb = this.button.getBoundingClientRect();
-					}
+				if (this.hasArrow) {
+			    	var s = bb.width / bbb.width;
+			    	pr = (s * 16) + "%";
+			    	this.copy.setAttribute("style", "padding-right: " + pr + ";padding-left: " + s * 16 + "%");
+					bb = this.copy.getBoundingClientRect();
+					bbb = this.button.getBoundingClientRect();
+				}
 
 				var widthTransform = (bbb.width ) / bb.width;
 				var heightTransform = (bbb.height ) / bb.height;

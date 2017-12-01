@@ -121,16 +121,16 @@
 					MonetComponent.getMonetData().then(
 						function(data){
 							var key = this.getAttribute('data-dynamic-key') || 'CTA';
-							console.log('CTA - key:', key)
+							//console.log('CTA - key:', key)
 							var d = key;
 							if (d.split('.').length == 1) {
-								console.log('CTA - if split length == 1:', d.split('.'))
+								//console.log('CTA - if split length == 1:', d.split('.'))
 								d = 'rootAssets["text.' + d + '"].text';
 							}
 							try {
-								console.log('CTA - d:', d)
+								//console.log('CTA - d:', d)
 								cta = eval('data.' + d);
-								console.log('CTA - cta:', cta)
+								//console.log('CTA - cta:', cta)
 								this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
 								this.text(cta);
 								this.dispatchEvent(new CustomEvent('ready'))

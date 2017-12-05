@@ -61,7 +61,7 @@
 
 		createdCallback: {
 			value: function() {	
-				this.attached = false;	
+				this._attached = false;	
 
 				this.button = create('button', this);
 				this.fill = create('fill', this.button);
@@ -83,7 +83,7 @@
 
 		attachedCallback: {
 			value: function() {				
-				this.attached = true;
+				this._attached = true;
 				
 				this.data = {};
 				this.data.color = [this.getAttribute('color-1') || '#e50914', this.getAttribute('color-2') || '#ffffff'];
@@ -113,6 +113,15 @@
 					this.dispatchEvent(c);
 				}.bind(this));
 
+				// necessary to get the arrow to change color properly
+				this.button.addEventListener('mouseover', function(event) {
+					this.mouseover.call(this)
+				}.bind(this))
+
+				this.button.addEventListener('mouseout', function(event) {
+					this.mouseout.call(this)
+				}.bind(this))
+
 				var cta = 'WATCH NOW';
 
 				var MonetComponent = document.querySelector('monet-integrator');
@@ -121,16 +130,12 @@
 					MonetComponent.getMonetData().then(
 						function(data){
 							var key = this.getAttribute('data-dynamic-key') || 'CTA';
-							//console.log('CTA - key:', key)
 							var d = key;
 							if (d.split('.').length == 1) {
-								//console.log('CTA - if split length == 1:', d.split('.'))
 								d = 'rootAssets["text.' + d + '"].text';
 							}
 							try {
-								//console.log('CTA - d:', d)
 								cta = eval('data.' + d);
-								//console.log('CTA - cta:', cta)
 								this.copy.classList.add(Monet.getComponentLocale("text." + key).substr(0,2));
 								this.text(cta);
 								this.dispatchEvent(new CustomEvent('ready'))
@@ -167,7 +172,7 @@
 
 		attributeChangedCallback: {
 			value: function() {
-				if (this.attached) this.resize();
+				if (this._attached) this.resize();
 			},
 			enumerable: true
 		},
@@ -214,7 +219,7 @@
 				var p = bbb.width - copyBounds.width;
 				
 				this.height = height;
-				if (this.attached){
+				if (this._attached){
 					this.arrow.innerHTML = "";
 
 					// createArrow

@@ -39,6 +39,7 @@
       "label": "Dynamic ID",
       "type": "string",
       "required": false,
+      "defaultValue": "CTA",
       "description": "Monet dynamic data binding."
     },
     {

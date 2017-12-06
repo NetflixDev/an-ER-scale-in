@@ -28,6 +28,12 @@
 
 		if (!Utils.isMobile) {
 			Utils.createStyle.call(this, COMPONENT_NAME,
+				'.button:hover .bgImageHover', 
+				'width:100% !important;',
+
+				'.button.hover .bgImageHover', 
+				'width:100% !important;',
+
 				'.button:hover .fill', 
 				'transform: scale(1, 1); -webkit-transform: scale(1, 1);',
 
@@ -63,20 +69,20 @@
 			value: function() {	
 				this._attached = false;	
 
-				this.button = create('button', this);
-				this.fill = create('fill', this.button);
-				this.copy = create('copy', this.button);
-				this.arrow = create('arrow');
-				this.border = create('border');
+				// this.button = create('button', this);
+				// this.fill = create('fill', this.button);
+				// this.copy = create('copy', this.button);
+				// this.arrow = create('arrow');
+				// this.border = create('border');
 
-				function create(name, target) {
-					var elem = document.createElement('div');
-					elem.className = name;
-					if (target) {
-						target.appendChild(elem)
-					}
-					return elem;
-				}	
+				// function create(name, target) {
+				// 	var elem = document.createElement('div');
+				// 	elem.className = name;
+				// 	if (target) {
+				// 		target.appendChild(elem)
+				// 	}
+				// 	return elem;
+				// }	
 			},
 			enumerable: true
 		},
@@ -91,6 +97,47 @@
 				this.data.font = (this.getAttribute('font') || 'Netflix Sans') + ', Arial, sans-serif';
 				this.data.text = this.getAttribute('text');			
 				
+				this.button = document.createElement('div');
+				this.button.className = 'button';
+				this.fill = document.createElement('div');
+				this.fill.className = 'fill';
+				this.copy = document.createElement('div');
+				this.copy.className = 'copy';
+				this.arrow = document.createElement('div');
+				this.arrow.className = 'arrow';
+				this.border = document.createElement('div');
+				this.border.className = 'border';
+
+				var bgImg = this.getAttribute('background-image');
+				if (bgImg) {
+					this.bgImgContainer = document.createElement("div");
+					this.bgImgContainer.className = "bgImage";
+					var img = new Image();
+					img.src = bgImg;
+					this.bgImgContainer.appendChild(img);
+					this.button.appendChild(this.bgImgContainer);
+					this.bgImgContainer.setAttribute("style", "position: absolute; top:0;left:0;");
+					img.setAttribute("style", "min-width:"+this.width+"px;");
+				}
+
+				this.appendChild(this.button);
+				this.button.appendChild(this.fill);
+
+				var bgImgHover = this.getAttribute('background-image-hover');
+				if (bgImgHover) {
+					this.bgImgContainerHover = document.createElement("div");
+					this.bgImgContainerHover.className = "bgImageHover";
+					var imgHover = new Image();
+					imgHover.src = bgImgHover;
+					this.bgImgContainerHover.appendChild(imgHover);
+					this.button.appendChild(this.bgImgContainerHover);
+					this.bgImgContainerHover.setAttribute("style", "position: absolute; top:0;left:0;width:0%;overflow:hidden;height:"+this.height+"px; transition: width .4s cubic-bezier(0.19, 1, 0.22, 1);");
+					imgHover.setAttribute("style", "min-width:"+this.width+"px;");
+					this.fill.setAttribute("style", "display:none;")
+				}
+
+				this.button.appendChild(this.copy);
+
 				this.hasArrow = this.hasAttribute('arrow');
 				this.hasBorder = this.hasAttribute('border');
 				this.borderSize = this.getAttribute('border') || 1;
@@ -263,7 +310,7 @@
 
 		preview: {
 			value: function() {
-				window.dispatchEvent(new CustomEvent('monetDataReady'));
+		
 			}
 		}
 

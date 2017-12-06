@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pk-component-utils": "git://github.com/NetflixAdsEng/pk-component-utils.git",
-    "pk-component-assets": "git://github.com/NetflixAdsEng/pk-component-assets.git"
+    "pk-component-utils": "git+ssh://git@github.com/NetflixAdsEng/pk-component-utils.git#0.1",
+    "pk-component-assets": "git+ssh://git@github.com/NetflixAdsEng/pk-component-assets.git#0.1"
   }
 }

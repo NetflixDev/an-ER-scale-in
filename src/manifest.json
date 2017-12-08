@@ -35,7 +35,7 @@
       "description": "The color of the mouseover."
     },
     {
-      "name": "dynamic",
+      "name": "data-dynamic-key",
       "label": "Dynamic ID",
       "type": "string",
       "required": false,

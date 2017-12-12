@@ -2,7 +2,7 @@
   "name": "Netflix CTA",
   "type": "netflix-cta",
   "tagName": "netflix-cta",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Netflix branded CTA button.",
   "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
   "files": {
@@ -35,14 +35,6 @@
       "description": "The color of the mouseover."
     },
     {
-      "name": "data-dynamic-key",
-      "label": "Dynamic ID",
-      "type": "string",
-      "required": false,
-      "defaultValue": "CTA",
-      "description": "Monet dynamic data binding."
-    },
-    {
       "name": "arrow",
       "label": "Arrow",
       "type": "boolean",
@@ -69,6 +61,18 @@
       "type": "string",
       "required": false,
       "description": "Set a background image for rollover state."
+    },
+    {
+      "name": "data-dynamic-key",
+      "label": "Dynamic Key",
+      "type": "string",
+      "required": true,
+      "description": "Monet dynamic data binding.",
+      "defaultValue": "CTA",
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
     }
   ],
   "events": [

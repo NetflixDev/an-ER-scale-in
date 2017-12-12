@@ -68,21 +68,6 @@
 		createdCallback: {
 			value: function() {	
 				this._attached = false;	
-
-				// this.button = create('button', this);
-				// this.fill = create('fill', this.button);
-				// this.copy = create('copy', this.button);
-				// this.arrow = create('arrow');
-				// this.border = create('border');
-
-				// function create(name, target) {
-				// 	var elem = document.createElement('div');
-				// 	elem.className = name;
-				// 	if (target) {
-				// 		target.appendChild(elem)
-				// 	}
-				// 	return elem;
-				// }	
 			},
 			enumerable: true
 		},

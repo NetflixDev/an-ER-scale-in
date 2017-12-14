@@ -55,8 +55,19 @@
         "type": "string",
         "required": false,
         "description": "Set a background image for rollover state."
-    }],
-    
+    },
+    {
+        "name": "data-dynamic-key",
+        "label": "data-dynamic-key",
+        "type": "string",
+        "required": true,
+        "defaultValue": "CTA",
+        "gwdSpecific": {
+          "important": true
+        },
+        "advanced": true
+      }
+  ],
     "events": [{
         "name": "cta-click",
         "label": "cta-click",

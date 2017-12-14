@@ -1,6 +1,6 @@
 {
   "name": "@netflixadseng/wc-netflix-cta",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Netflix CTA Web Component",
   "scripts": {
     "init": "sh testing_framework/installer.sh && npm install && node lib/api.js --cmd install",

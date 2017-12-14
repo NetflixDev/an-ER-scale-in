@@ -13,7 +13,7 @@ module.exports = {
   "updated": 15041357528383,
   "full_name": "NetflixAdsEng/wc-netflix-cta",
   "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
-  "version": "[master 5a4adf2]",
+  "version": "[master 5c6832b]",
   "attributes": [
     {
       "name": "data-dynamic-key",

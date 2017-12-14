@@ -5,9 +5,6 @@
   "scripts": {
     "init": "sh testing_framework/installer.sh && npm install && node lib/api.js --cmd install",
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
-    "localhost": "sh lib/confirm_env.sh 'sh testing_framework/localhost.sh'",
-    "test": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js'",
-    "headless": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js --headless'",
     "publishDist": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'"
   },
   "repository": {

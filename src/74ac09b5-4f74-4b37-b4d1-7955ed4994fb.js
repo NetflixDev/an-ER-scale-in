@@ -1,6 +1,6 @@
 // GENERIC SOURCE TRACKER: wc-netflix-cta
-if (typeof module === "undefined") {
-    module = {};
+if (typeof module === 'undefined') {
+	module = {}
 }
 
 module.exports = {
@@ -10,9 +10,9 @@ module.exports = {
   "type": "web_components",
   "context": "Default",
   "state": "published",
-  "updated": 1513302920518,
+  "updated": 1513366748150,
   "full_name": "NetflixAdsEng/wc-netflix-cta",
   "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
   "username": "gmcdev",
-  "version": "[feature/dependencies 37a3b45]"
-};
+  "version": "[feature/dependencies fc24b7b]"
+}

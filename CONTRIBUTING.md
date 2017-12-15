@@ -17,7 +17,7 @@ This scaffold provides tools that make it easier to author, test, maintain, shar
 
 
 ## Installation
-`npm install` && `npm run init`
+`npm install && npm run init`
  - attaches the GS-tracker to GWD-manifest
  - git hooks are installed from `./hooks` to `./.git/hooks`. These ensure that the `./dist` folder is up-to-date.
  - if there is a `./lib/package.json`, then it will also be installed. This allows authors of this scaffold to bundle additional infrastructure, if needed.
@@ -89,8 +89,8 @@ The component-API will use `./src/manifest.json` to automatically build a number
  - creates `./index.js` which enables this component to be added as an NPM-style dependency
 
 
-### PUBLISH
-`npm run publish`
+### DIST
+`npm run dist`
  - copies `./src` to `./dist/src`
  - creates a zip in `./dist/gwd` that can be imported as a Component in GWD
  - marks the component as `published` in C20

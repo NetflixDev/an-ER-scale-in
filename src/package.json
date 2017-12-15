@@ -1,15 +1,15 @@
 {
-  "name": "wc-netflix-cta",
-  "version": "1.0.0",
-  "description": "",
-  "main": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "pk-component-utils": "git+ssh://git@github.com/NetflixAdsEng/pk-component-utils.git#0.1",
-    "pk-component-assets": "git+ssh://git@github.com/NetflixAdsEng/pk-component-assets.git#0.1"
-  }
+	"name": "wc-netflix-cta",
+	"version": "1.0.0",
+	"description": "",
+	"main": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@netflixadseng/pk-component-utils": "latest",
+		"@netflixadseng/pk-component-assets": "latest"
+	}
 }

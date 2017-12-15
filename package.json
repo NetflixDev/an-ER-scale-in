@@ -1,12 +1,12 @@
 {
-  "name": "wc-netflix-cta",
-  "version": "1.0.0",
+  "name": "@netflixadseng/wc-netflix-cta",
+  "version": "1.0.1",
   "description": "CTA button",
   "scripts": {
     "init": "node lib/api.js --cmd install",
     "postinstall": "cd src/ && npm install",
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
-    "publish": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
+    "dist": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
     "localhost": "sh lib/confirm_env.sh 'sh testing_framework/localhost.sh'",
     "install-testing-framework": "sh testing_framework/installer.sh",
     "test": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js'",
@@ -40,10 +40,10 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1513279419241,
+    "updated": 1513298758070,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
     "username": "gmcdev",
-    "version": "[feature/dependencies 1963721]"
+    "version": "[feature/dependencies a1b6943]"
   }
 }

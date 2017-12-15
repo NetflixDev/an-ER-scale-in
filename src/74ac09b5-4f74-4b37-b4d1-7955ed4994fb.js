@@ -1,6 +1,6 @@
 // GENERIC SOURCE TRACKER: wc-netflix-cta
-if (typeof module === "undefined") {
-    module = {};
+if (typeof module === 'undefined') {
+	module = {}
 }
 
 module.exports = {
@@ -10,21 +10,9 @@ module.exports = {
   "type": "web_components",
   "context": "Default",
   "state": "published",
-  "updated": 15041357528383,
+  "updated": 1513366748150,
   "full_name": "NetflixAdsEng/wc-netflix-cta",
   "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
-  "version": "[master 5c6832b]",
-  "attributes": [
-    {
-      "name": "data-dynamic-key",
-      "label": "data-dynamic-key",
-      "type": "string",
-      "required": true,
-      "defaultValue": "CTA",
-      "gwdSpecific": {
-        "important": true
-      },
-      "advanced": true
-    }
-  ]
-};
+  "username": "gmcdev",
+  "version": "[feature/dependencies fc24b7b]"
+}

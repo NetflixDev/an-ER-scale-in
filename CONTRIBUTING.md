@@ -96,7 +96,10 @@ The component-API will use `./src/manifest.json` to automatically build a number
  - marks the component as `published` in C20
 
 
+### PUBLISHING
+Install this global package https://github.com/sindresorhus/np
 
+Then run `npm run pub`
 
 
 
@@ -109,7 +112,7 @@ The component-API will use `./src/manifest.json` to automatically build a number
 Selenium can run any number of tests on any installed browsers. When run from the CLI, it will 
 automatically launch Chrome and execute until all the tests are complete.
 
-`npm run test`   
+`npm run tests`   
  - build all of the preview files.
  - generate a test suite for Monet requirements (ex: `boilerplate_tests.html`).
  - launch Selenium and run everything in the `./test` folder on every browser specified (and installed).

@@ -1,6 +1,6 @@
 {
   "name": "@netflixadseng/wc-netflix-cta",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Netflix CTA Web Component",
   "scripts": {
     "init": "node lib/api.js --cmd install",
@@ -9,8 +9,9 @@
     "dist": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
     "localhost": "sh lib/confirm_env.sh 'sh testing_framework/localhost.sh'",
     "install-testing-framework": "sh testing_framework/installer.sh",
-    "test": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js'",
-    "headless": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js --headless'"
+    "tests": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js'",
+    "headless": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js --headless'",
+    "pub": "np"
   },
   "repository": {
     "type": "git",
@@ -40,10 +41,10 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1513366748744,
+    "updated": 1513379879109,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
     "username": "gmcdev",
-    "version": "[feature/dependencies fc24b7b]"
+    "version": "[feature/dependencies 3870624]"
   }
 }

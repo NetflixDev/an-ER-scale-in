@@ -7,10 +7,6 @@
     "postinstall": "cd src/ && npm install",
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
     "dist": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
-    "localhost": "sh lib/confirm_env.sh 'sh testing_framework/localhost.sh'",
-    "install-testing-framework": "sh testing_framework/installer.sh",
-    "tests": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js'",
-    "headless": "sh lib/confirm_env.sh 'npm run build' 'node testing_framework/api.js --headless'",
     "pub": "np"
   },
   "repository": {
@@ -32,7 +28,7 @@
     "varname": "^2.0.3",
     "walk": "^2.3.9"
   },
-  "author": "supabok",
+  "author": "netflix",
   "license": "ISC",
   "genericSource": {
     "id": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb",
@@ -41,10 +37,10 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1513379879109,
+    "updated": 1513405705844,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
-    "username": "gmcdev",
+    "username": "netflix",
     "version": "[feature/dependencies 3870624]"
   }
 }

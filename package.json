@@ -7,7 +7,8 @@
     "postinstall": "cd src/ && npm install",
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
     "dist": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
-    "pub": "np"
+    "pub": "np",
+    "version": "node lib/api.js --cmd track && npm run dist"
   },
   "repository": {
     "type": "git",
@@ -37,10 +38,10 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1513405705844,
+    "updated": 1515447874969,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
-    "username": "netflix",
-    "version": "[feature/dependencies 3870624]"
+    "username": "gmcdev",
+    "version": "1.0.5"
   }
 }

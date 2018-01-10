@@ -18,12 +18,17 @@
     "archiver": "^1.3.0",
     "debug": "git://github.com/gmcdev/debug.git",
     "escape-regexp": "0.0.1",
+    "eslint": "^4.15.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.4.0",
     "github-current-user": "^2.5.0",
     "handlebars": "^4.0.10",
     "jszip": "^3.1.5",
     "minimist": "^1.2.0",
     "muffle": "^2.0.1",
     "ncp": "^2.0.0",
+    "prettier": "^1.9.2",
+    "prettier-eslint": "^8.7.1",
     "rimraf": "^2.6.1",
     "uuid": "^3.0.1",
     "varname": "^2.0.3",
@@ -38,10 +43,10 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1515449148905,
+    "updated": 1515547609178,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
     "username": "gmcdev",
-    "version": "1.0.5"
+    "version": "1.0.6"
   }
 }

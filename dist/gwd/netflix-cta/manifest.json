@@ -7,24 +7,17 @@
   "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
   "files": {
     "js": [
-      "node_modules/@netflixadseng/pk-component-utils/src/createStyle.js",
-      "node_modules/@netflixadseng/pk-component-utils/src/deviceUtils.js",
-      "node_modules/@netflixadseng/pk-component-utils/src/SvgIcon.js",
-      "NetflixCtaComponent.js",
-      "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"
+      "createStyle__999f.js",
+      "deviceUtils__bddb.js",
+      "SvgIcon__0d77.js",
+      "NetflixCtaComponent__6a20.js",
+      "74ac09b5-4f74-4b37-b4d1-7955ed4994fb__768d.js"
     ]
   },
   "externalScripts": [
     "https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js"
   ],
   "attributes": [
-    {
-      "name": "rtl",
-      "label": "Right-to-left text",
-      "type": "boolean",
-      "required": false,
-      "description": "Right-to-left text."
-    },
     {
       "name": "color-1",
       "label": "Primary Color",

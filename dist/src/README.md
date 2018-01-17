@@ -12,6 +12,7 @@
 - _text_ : Static copy when not dynamic.
 - _arrow_ : Enabled arrow.
 - _border_ : Border size.
+- _rtl_ : Right-to-left text.
 
 ### Methods
 - _mouseover()_ : Call this to programmatically trigger the mouseover animation.

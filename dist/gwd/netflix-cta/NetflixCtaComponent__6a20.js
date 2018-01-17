@@ -7,25 +7,22 @@
       this,
       COMPONENT_NAME,
       '.button',
-      'will-change: transform;cursor: pointer;overflow: hidden;text-align: center;font-size:' +
-        this.data.size +
-        'px; font-family: ' +
-        this.data.font,
+      'cursor: pointer;overflow: hidden;text-align: center;font-size:' + this.data.size + 'px; font-family: ' + this.data.font,
       '.button .fill',
-      'will-change: transform;width:100%;height:100%;transform-origin:top left;-webkit-transform-origin:top left;transform: scale(0, 1);-webkit-transform: scale(0, 1); transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);',
+      'width:100%;height:100%;transform-origin:top left;-webkit-transform-origin:top left;transform: scale(0, 1);-webkit-transform: scale(0, 1); transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);',
       '.button .arrow',
-      'will-change: transform;position:absolute;text-align: right;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: translate(0%, -50%);transform: translate(0%, -50%);',
+      'position:absolute;text-align: right;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: translate(0%, -50%);transform: translate(0%, -50%);',
       '.button .arrow svg',
       'position:absolute;right:4%;left:auto;top:0;',
       '.button .copy',
-      'will-change: transform;transform-origin: 0 0;white-space:nowrap;letter-spacing:1.5px; padding:4px 8%;transition: color .4s cubic-bezier(0.19, 1, 0.22, 1);color:' +
+      'transform-origin: 0 0;white-space:nowrap;letter-spacing:1.5px; padding:4px 8%;transition: color .4s cubic-bezier(0.19, 1, 0.22, 1);color:' +
         this.data.color[1],
       '.button .border',
       '-webkit-box-sizing: border-box;box-sizing: border-box;position: absolute;top: 0;left: 0;width:100%;height:100%;border:solid ' +
         this.borderSize +
         'px ' +
         this.data.color[0],
-      'div',
+      '*',
       'position: absolute;top: 0;left: 0;'
     );
 
@@ -173,7 +170,7 @@
             function(data) {
               var key = this.getAttribute('data-dynamic-key') || 'CTA';
               var d = key;
-              if (d.split('.').length === 1) {
+              if (d.split('.').length == 1) {
                 d = 'rootAssets["text.' + d + '"].text';
               }
               try {
@@ -190,7 +187,7 @@
                 MonetComponent.getBackupMonetData().then(
                   function(backupData) {
                     var ld = d;
-                    if (d.split('.').length === 1) {
+                    if (d.split('.').length == 1) {
                       d = 'rootAssets["text.' + d + '"].text';
                     }
                     cta = eval('backupData.' + d);
@@ -230,65 +227,36 @@
 
     resize: {
       value: function(w, h) {
-        this.rtl = this.getAttribute('rtl');
-
-        if (this.rtl) {
-          this.arrow.setAttribute(
-            'style',
-            'position:absolute;text-align: left;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: scale(-1,1) translate(0%, -50%);transform: scale(-1,1) translate(0%, -50%);'
-          );
-        } else {
-          this.arrow.setAttribute(
-            'style',
-            'position:absolute;text-align: right;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: translate(0%, -50%);transform: translate(0%, -50%);'
-          );
-        }
-
         var width = w || (this.getAttribute('width') || (this.offsetWidth || 109));
         var height = h || (this.getAttribute('height') || (this.offsetHeight || 28));
 
         this.button.style.width = this.style.width = width + 'px';
         this.button.style.height = this.style.height = height + 'px';
         this.copy.setAttribute('style', 'transform: scale(1);');
-        var lines = this.copy.innerHTML.split(/\r\n|\r|\n|\<br\>/).length;
 
-        var copyBounds = this.copy.getBoundingClientRect();
-        var buttonBounds = this.button.getBoundingClientRect();
+        var bb = this.copy.getBoundingClientRect();
+        var bbb = this.button.getBoundingClientRect();
         var pr = '8%';
 
         if (this.hasArrow) {
-          var s = copyBounds.width / buttonBounds.width;
+          var s = bb.width / bbb.width;
           pr = s * 16 + '%';
-          if (this.rtl) {
-            this.copy.setAttribute(
-              'style',
-              'padding-top: ' + (lines > 1 ? '0' : '20%') + '; padding-left: ' + pr + ';padding-right: ' + s * 16 + '%'
-            );
-          } else {
-            this.copy.setAttribute(
-              'style',
-              'padding-top:' + (lines > 1 ? '0' : '20%') + '; padding-right: ' + pr + ';padding-left: ' + s * 16 + '%'
-            );
-          }
-          copyBounds = this.copy.getBoundingClientRect();
-          buttonBounds = this.button.getBoundingClientRect();
+          this.copy.setAttribute('style', 'padding-right: ' + pr + ';padding-left: ' + s * 16 + '%');
+          bb = this.copy.getBoundingClientRect();
+          bbb = this.button.getBoundingClientRect();
         }
 
-        var widthTransform = buttonBounds.width / copyBounds.width;
-        var heightTransform = buttonBounds.height / copyBounds.height;
+        var widthTransform = bbb.width / bb.width;
+        var heightTransform = bbb.height / bb.height;
         var value = widthTransform < heightTransform ? widthTransform : heightTransform;
 
         var matrix = window.getComputedStyle(this.copy, null).getPropertyValue('transform');
-        if (this.rtl) {
-          this.copy.setAttribute('style', 'transform: scale(' + value.toFixed(3) + ');padding-left: ' + pr);
-        } else {
-          this.copy.setAttribute('style', 'transform: scale(' + value.toFixed(3) + ');padding-right: ' + pr);
-        }
+        this.copy.setAttribute('style', 'transform: scale(' + value.toFixed(3) + ');padding-right: ' + pr);
 
         var copyBounds = this.copy.getBoundingClientRect();
         var xp = Math.ceil(copyBounds.width * 0.96 / 2);
         var yp = Math.ceil(copyBounds.height / 2);
-        var p = buttonBounds.width - copyBounds.width;
+        var p = bbb.width - copyBounds.width;
 
         this.height = height;
         if (this._attached) {
@@ -310,28 +278,15 @@
 
           this.arrow.appendChild(elem);
         }
-
-        if (this.rtl) {
-          this.copy.setAttribute(
-            'style',
-            'backface-visibility: hidden; transform: translateZ(0) scale(' +
-              value.toFixed(3) +
-              ') translate(-50%,0); left: 50%;top:50%;margin-top:-' +
-              yp +
-              'px;padding-left: ' +
-              pr
-          );
-        } else {
-          this.copy.setAttribute(
-            'style',
-            'backface-visibility: hidden; transform: translateZ(0) scale(' +
-              value.toFixed(3) +
-              ') translate(-50%,0); left: 50%;top:50%;margin-top:-' +
-              yp +
-              'px;padding-right: ' +
-              pr
-          );
-        }
+        this.copy.setAttribute(
+          'style',
+          'backface-visibility: hidden; transform: translateZ(0) scale(' +
+            value.toFixed(3) +
+            ') translate(-50%,0); left: 50%;top:50%;margin-top:-' +
+            yp +
+            'px;padding-right: ' +
+            pr
+        );
       }
     },
 

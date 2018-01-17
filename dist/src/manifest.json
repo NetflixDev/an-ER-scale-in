@@ -19,6 +19,13 @@
   ],
   "attributes": [
     {
+      "name": "rtl",
+      "label": "Right-to-left text",
+      "type": "boolean",
+      "required": false,
+      "description": "Right-to-left text."
+    },
+    {
       "name": "color-1",
       "label": "Primary Color",
       "type": "color",

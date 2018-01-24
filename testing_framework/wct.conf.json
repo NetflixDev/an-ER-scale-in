@@ -1,0 +1,18 @@
+{
+  "root": "../",
+  "verbose": false,
+  "quiet": true,
+  "persistent": true,
+  "browserOptions": {
+    "chromeOptions": {
+      "args": []
+    }
+  },
+  "plugins": {
+    "local": {
+      "browsers": [
+        "chrome"
+      ]
+    }
+  }
+}

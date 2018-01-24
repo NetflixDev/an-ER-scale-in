@@ -1,11 +1,14 @@
 (function() {
   var COMPONENT_NAME = 'netflix-cta';
   var PREFIX = 'mm-component';
-
+  
   function style() {
+    // use unique class name as identifier because there dynamic values in the generated stylesheet
+    var UNIQUE_CLASS_NAME = 'uc-' + (Math.random() * 1000000).toFixed(0);
+    
     Utils.createStyle.call(
       this,
-      COMPONENT_NAME,
+      COMPONENT_NAME + '.' + UNIQUE_CLASS_NAME,
       '.button',
       'will-change: transform;cursor: pointer;overflow: hidden;text-align: center;font-size:' +
         this.data.size +
@@ -32,7 +35,7 @@
     if (!Utils.isMobile) {
       Utils.createStyle.call(
         this,
-        COMPONENT_NAME,
+        COMPONENT_NAME + '.' + UNIQUE_CLASS_NAME,
         '.button:hover .bgImageHover',
         'width:100% !important;',
         '.button.hover .bgImageHover',
@@ -54,7 +57,7 @@
       );
     }
 
-    this.className += ' ' + PREFIX;
+    this.className += ' ' + PREFIX + ' ' + UNIQUE_CLASS_NAME;
     this.style.position = 'absolute';
     this.button.style.backgroundColor = this.data.color[0];
     this.fill.style.backgroundColor = this.data.color[1];

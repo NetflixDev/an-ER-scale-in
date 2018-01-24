@@ -3,7 +3,7 @@
   var PREFIX = 'mm-component';
   
   function style() {
-    // use unique class name as identifier because there dynamic values in the generated stylesheet
+    // use unique class name as identifier because there are dynamic values in the generated stylesheet
     var UNIQUE_CLASS_NAME = 'uc-' + (Math.random() * 1000000).toFixed(0);
     
     Utils.createStyle.call(

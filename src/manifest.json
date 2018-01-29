@@ -70,6 +70,18 @@
       "description": "Set a background image for rollover state."
     },
     {
+      "name": "font-size",
+      "label": "Font Size",
+      "type": "number",
+      "required": false,
+      "description": "Set a font size other than the default (20)",
+      "defaultValue": 20,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    },
+    {
       "name": "data-dynamic-key",
       "label": "Dynamic Key",
       "type": "string",

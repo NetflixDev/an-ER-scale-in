@@ -181,7 +181,11 @@
               }
               try {
                 cta = eval('data.' + d);
-                this.copy.classList.add(Monet.getComponentLocale('text.' + key).substr(0, 2));
+                var locale = Monet.getComponentLocale('text.' + key).substr(0, 2)
+                this.copy.classList.add(locale);
+                if (locale == "ar" || locale == "he") {
+                  this.setAttribute("rtl", true);
+                }
                 this.text(cta);
                 this.dispatchEvent(new CustomEvent('ready'));
               } catch (e) {
@@ -197,7 +201,11 @@
                       d = 'rootAssets["text.' + d + '"].text';
                     }
                     cta = eval('backupData.' + d);
-                    this.copy.classList.add(Monet.getComponentLocale('text.' + key).substr(0, 2));
+                    var locale = Monet.getComponentLocale('text.' + key).substr(0, 2)
+                    this.copy.classList.add(locale);
+                    if (locale == "ar" || locale == "he") {
+                      this.setAttribute("rtl", true);
+                    }
                     this.text(cta);
 
                     this.dispatchEvent(new CustomEvent('ready'));

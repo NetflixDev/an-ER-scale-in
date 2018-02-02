@@ -27,6 +27,7 @@
     "minimist": "^1.2.0",
     "muffle": "^2.0.1",
     "ncp": "^2.0.0",
+    "np": "^2.18.3",
     "prettier": "^1.9.2",
     "prettier-eslint": "^8.7.1",
     "rimraf": "^2.6.1",

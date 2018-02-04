@@ -8,7 +8,9 @@
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
     "dist": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
     "pub": "np",
-    "version": "node lib/api.js --cmd track && npm run dist"
+    "preversion": "node lib/api.js --cmd track",
+    "version": "npm run dist && npm run gitCommit",
+    "gitCommit": "git add . && git commit -m 'update pkg ver'"
   },
   "repository": {
     "type": "git",

@@ -6,12 +6,11 @@
 	</head>
 
 	<body>
-		
-				<netflix-cta></netflix-cta>
 
 		<script>
-			var component = document.getElementsByTagName('netflix-cta')[0];
+			var component = document.createElement('netflix-cta');
 			component.preview();
+			document.body.appendChild(component);
 		</script>
 	</body>
 </html>

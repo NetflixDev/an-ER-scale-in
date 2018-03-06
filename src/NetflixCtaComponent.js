@@ -1,11 +1,11 @@
 (function() {
   var COMPONENT_NAME = 'netflix-cta';
   var PREFIX = 'mm-component';
-  
+
   function style() {
     // use unique class name as identifier because there are dynamic values in the generated stylesheet
     var UNIQUE_CLASS_NAME = 'uc-' + (Math.random() * 1000000).toFixed(0);
-    
+
     Utils.createStyle.call(
       this,
       COMPONENT_NAME + '.' + UNIQUE_CLASS_NAME,
@@ -67,6 +67,17 @@
     createdCallback: {
       value: function() {
         this._attached = false;
+
+        this.button = document.createElement('div');
+        this.button.className = 'button';
+        this.fill = document.createElement('div');
+        this.fill.className = 'fill';
+        this.copy = document.createElement('div');
+        this.copy.className = 'copy';
+        this.arrow = document.createElement('div');
+        this.arrow.className = 'arrow';
+        this.border = document.createElement('div');
+        this.border.className = 'border';
       },
       enumerable: true
     },
@@ -80,17 +91,6 @@
         this.data.size = this.getAttribute('font-size') || 20;
         this.data.font = (this.getAttribute('font') || 'Netflix Sans') + ', Arial, sans-serif';
         this.data.text = this.getAttribute('text');
-
-        this.button = document.createElement('div');
-        this.button.className = 'button';
-        this.fill = document.createElement('div');
-        this.fill.className = 'fill';
-        this.copy = document.createElement('div');
-        this.copy.className = 'copy';
-        this.arrow = document.createElement('div');
-        this.arrow.className = 'arrow';
-        this.border = document.createElement('div');
-        this.border.className = 'border';
 
         var bgImg = this.getAttribute('background-image');
         if (bgImg) {
@@ -181,10 +181,10 @@
               }
               try {
                 cta = eval('data.' + d);
-                var locale = Monet.getComponentLocale('text.' + key).substr(0, 2)
+                var locale = Monet.getComponentLocale('text.' + key).substr(0, 2);
                 this.copy.classList.add(locale);
-                if (locale == "ar" || locale == "he") {
-                  this.setAttribute("rtl", true);
+                if (locale == 'ar' || locale == 'he') {
+                  this.setAttribute('rtl', true);
                 }
                 this.text(cta);
                 this.dispatchEvent(new CustomEvent('ready'));
@@ -201,10 +201,10 @@
                       d = 'rootAssets["text.' + d + '"].text';
                     }
                     cta = eval('backupData.' + d);
-                    var locale = Monet.getComponentLocale('text.' + key).substr(0, 2)
+                    var locale = Monet.getComponentLocale('text.' + key).substr(0, 2);
                     this.copy.classList.add(locale);
-                    if (locale == "ar" || locale == "he") {
-                      this.setAttribute("rtl", true);
+                    if (locale == 'ar' || locale == 'he') {
+                      this.setAttribute('rtl', true);
                     }
                     this.text(cta);
 
@@ -365,7 +365,11 @@
     },
 
     preview: {
-      value: function() {}
+      value: function() {
+        this.setAttribute('arrow', '');
+        this.setAttribute('border', '');
+        this.text('WATCH NOW');
+      }
     }
   });
 

@@ -5,8 +5,10 @@
   "scripts": {
     "init": "node lib/api.js --cmd install",
     "postinstall": "cd src/ && npm install",
+    "updateDeps": "cd src/ && npm update",
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
-    "dist": "sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
+    "dist": "npm run updateDeps && sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
+    "localhost": "sh lib/confirm_env.sh 'http-server ./dist -p 8000'",
     "pub": "np",
     "track": "node lib/api.js --cmd track",
     "version": "npm run dist && npm run track && npm run gitCommit",
@@ -25,6 +27,7 @@
     "eslint-plugin-prettier": "^2.4.0",
     "github-current-user": "^2.5.0",
     "handlebars": "^4.0.10",
+    "http-server": "^0.11.1",
     "jszip": "^3.1.5",
     "minimist": "^1.2.0",
     "muffle": "^2.0.1",
@@ -46,10 +49,14 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1520362633699,
+    "updated": 1520362478365,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
     "username": "GitHub",
-    "version": "1.1.6"
-  }
+    "version": "1.1.5"
+  },
+  "files": [
+    "dist",
+    "src"
+  ]
 }

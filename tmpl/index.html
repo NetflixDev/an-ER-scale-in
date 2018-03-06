@@ -6,10 +6,11 @@
 	</head>
 
 	<body>
-		{{componentTagInstance}}
+
 		<script>
-			var component = document.getElementsByTagName('{{componentId}}')[0];
+			var component = document.createElement('{{componentId}}');
 			component.preview();
+			document.body.appendChild(component);
 		</script>
 	</body>
 </html>

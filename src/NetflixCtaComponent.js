@@ -146,7 +146,7 @@
           'click',
           function() {
             if (this.click) this.click();
-            c = document.createEvent('CustomEvent');
+            var c = document.createEvent('CustomEvent');
             c.initCustomEvent('cta-click', !0, !0, 'Netflix CTA Click');
             this.dispatchEvent(c);
           }.bind(this)

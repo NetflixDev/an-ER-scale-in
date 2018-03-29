@@ -8,6 +8,7 @@
   "files": {
     "js": [
       "node_modules/@netflixadseng/pk-component-utils/src/createStyle.js",
+      "node_modules/@netflixadseng/pk-component-utils/src/textFit.js",
       "node_modules/@netflixadseng/pk-component-utils/src/deviceUtils.js",
       "node_modules/@netflixadseng/pk-component-utils/src/SvgIcon.js",
       "NetflixCtaComponent.js",

@@ -88,7 +88,7 @@
 
         this.data = {};
         this.data.color = [this.getAttribute('color-1') || '#e50914', this.getAttribute('color-2') || '#ffffff'];
-        this.data.size = this.getAttribute('font-size') || 20;
+        this.data.size = this.getAttribute('font-size');
         this.data.font = (this.getAttribute('font') || 'Netflix Sans') + ', Arial, sans-serif';
         this.data.text = this.getAttribute('text');
 

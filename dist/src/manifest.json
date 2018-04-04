@@ -84,6 +84,30 @@
       "advanced": true
     },
     {
+      "name": "width",
+      "label": "width",
+      "type": "number",
+      "required": true,
+      "description": "Set the width of the component",
+      "defaultValue": 96,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    },
+    {
+      "name": "height",
+      "label": "height",
+      "type": "number",
+      "required": true,
+      "description": "Set the height of the component",
+      "defaultValue": 28,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    },
+    {
       "name": "data-dynamic-key",
       "label": "Dynamic Key",
       "type": "string",

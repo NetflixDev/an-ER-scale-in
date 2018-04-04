@@ -1,6 +1,6 @@
 {
   "name": "@netflixadseng/wc-netflix-cta",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Netflix CTA Web Component",
   "scripts": {
     "init": "node lib/api.js --cmd install",
@@ -49,11 +49,11 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1522704779782,
+    "updated": 1522883269969,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
     "username": "GitHub",
-    "version": "1.3.2"
+    "version": "1.3.3"
   },
   "files": [
     "dist",

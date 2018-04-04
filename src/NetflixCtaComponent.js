@@ -14,6 +14,7 @@
         this.data.size +
         'px; font-family: ' +
         this.data.font,
+      '*', 'box-sizing: border-box;',
       '.button .fill',
       'will-change: transform;width:100%;height:100%;transform-origin:top left;-webkit-transform-origin:top left;transform: scale(0, 1);-webkit-transform: scale(0, 1); transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);',
       '.button .arrow',
@@ -101,7 +102,7 @@
           this.bgImgContainer.appendChild(img);
           this.button.appendChild(this.bgImgContainer);
           this.bgImgContainer.setAttribute('style', 'position: absolute; top:0;left:0;');
-          img.setAttribute('style', 'min-width:' + this.width + 'px;');
+          // img.setAttribute('style', 'min-width:' + this.width + 'px;');
         }
 
         this.appendChild(this.button);
@@ -121,7 +122,7 @@
               this.height +
               'px; transition: width .4s cubic-bezier(0.19, 1, 0.22, 1);'
           );
-          imgHover.setAttribute('style', 'min-width:' + this.width + 'px;');
+          // imgHover.setAttribute('style', 'min-width:' + this.width + 'px;');
           this.fill.setAttribute('style', 'display:none;');
         }
 
@@ -285,8 +286,9 @@
         }
 
         if (this.hasArrow) {
-          var pad = (0.01 * width) + s;
-          this.copy.style.width = (width - pad) + "px";
+          var pad = (0.04 * width) ;
+          this.copy.style.width = (width - (pad+s)) + "px";
+          TweenMax.set(this.copy, {css:{"padding-right": 0}});
         }
 
         Utils.textFit(this.copy, {detectMultiLine: true, alignHoriz: true, alignVert: true, minFontSize: this.data.size || 1, maxFontSize: this.data.size || 12});

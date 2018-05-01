@@ -10,6 +10,6 @@
 	"license": "ISC",
 	"dependencies": {
 		"@netflixadseng/pk-component-assets": "latest",
-		"@netflixadseng/pk-component-utils": "^1.2.0"
+		"@netflixadseng/pk-component-utils": "latest"
 	}
 }

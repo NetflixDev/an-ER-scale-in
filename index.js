@@ -1,7 +1,7 @@
 import './src/node_modules/@netflixadseng/pk-component-utils/src/createStyle.js'
+import './src/node_modules/@netflixadseng/pk-component-utils/src/textFit.js'
 import './src/node_modules/@netflixadseng/pk-component-utils/src/deviceUtils.js'
 import './src/node_modules/@netflixadseng/pk-component-utils/src/SvgIcon.js'
-import './src/node_modules/@netflixadseng/pk-component-utils/src/textFit.js'
 import './src/NetflixCtaComponent.js'
 import './src/74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js'
 // IMPORTANT !!! Absolute URLs must be handled manually:

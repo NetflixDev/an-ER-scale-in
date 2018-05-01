@@ -76,7 +76,7 @@
       "type": "number",
       "required": false,
       "description": "Set a font size other than the default (20)",
-      "defaultValue": 20,
+      "defaultValue": 0,
       "gwdSpecific": {
         "important": true
       },

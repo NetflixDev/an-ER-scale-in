@@ -8,7 +8,8 @@
 - _color-1_ : Primary fill color.
 - _color-2_ : Secondary fill/font color.
 - _font_ : Font family.
-- _data-dynamic-key_ : Dynaic data binding.
+- _font-size_: Optional integer. If not specified, the component autosizes the text content to fit in the CTA by default. In GWD, setting the value to 0 is identical as unspecified and triggers font autosize.
+- _data-dynamic-key_ : Dynamic data binding.
 - _text_ : Static copy when not dynamic.
 - _arrow_ : Enabled arrow.
 - _border_ : Border size.
@@ -17,7 +18,7 @@
 ### Methods
 - _mouseover()_ : Call this to programmatically trigger the mouseover animation.
 - _mouseout()_ : Call this to programmatically trigger the mouseout animation.
-- _text()_ : Call this to set the CTA text.
+- _text(textContent)_ : Call this to set the CTA text.
 - _resize(size)_ : Call this to programmatically set the size of the button. It accepts a size parameter which is an Object with width and height keys.
 
 ### Events

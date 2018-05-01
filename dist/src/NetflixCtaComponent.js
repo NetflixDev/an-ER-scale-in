@@ -102,7 +102,7 @@
 
         this.data = {};
         this.data.color = [this.getAttribute('color-1') || '#e50914', this.getAttribute('color-2') || '#ffffff'];
-        this.data.size = this.getAttribute('font-size');
+        this.data.size = parseInt(this.getAttribute('font-size'), 10) || null;
         this.data.font = (this.getAttribute('font') || 'Netflix Sans') + ', Arial, sans-serif';
         this.data.text = this.getAttribute('text');
 
@@ -241,13 +241,19 @@
 
     attributeChangedCallback: {
       value: function() {
-        if (this._attached) this.resize();
+        if (!this._attached) {
+          return
+        }
+        if (arguments[0] === 'font-size') {
+          this.data.size = parseInt(arguments[2], 10) || null;
+        }
+        this.resize();
       },
       enumerable: true
     },
 
     text: {
-      value: function(text, size) {
+      value: function(text) {
         this.copy.innerHTML = text || this.copy.innerHTML;
         this.resize();
       }

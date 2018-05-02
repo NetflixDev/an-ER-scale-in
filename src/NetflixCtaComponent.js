@@ -14,7 +14,8 @@
         this.data.size +
         'px; font-family: ' +
         this.data.font,
-      '*', 'box-sizing: border-box;',
+      '*',
+      'box-sizing: border-box;',
       '.button .fill',
       'will-change: transform;width:100%;height:100%;transform-origin:top left;-webkit-transform-origin:top left;transform: scale(0, 1);-webkit-transform: scale(0, 1); transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);',
       '.button .arrow',
@@ -242,7 +243,7 @@
     attributeChangedCallback: {
       value: function() {
         if (!this._attached) {
-          return
+          return;
         }
         if (arguments[0] === 'font-size') {
           this.data.size = parseInt(arguments[2], 10) || null;
@@ -267,17 +268,17 @@
           return;
         }
 
-        this._resizeQueued = false
+        this._resizeQueued = false;
         this.rtl = this.getAttribute('rtl');
 
-        if (this.rtl) {          
-          TweenMax.set(this.copy, {css:{"right":0, "left":"auto"}});
+        if (this.rtl) {
+          TweenMax.set(this.copy, { css: { right: 0, left: 'auto' } });
           this.arrow.setAttribute(
             'style',
             'position:absolute;text-align: left;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: scale(-1,1) translate(0%, -50%);transform: scale(-1,1) translate(0%, -50%);'
           );
         } else {
-          TweenMax.set(this.copy, {css:{"right":"auto", "left":0}});
+          TweenMax.set(this.copy, { css: { right: 'auto', left: 0 } });
           this.arrow.setAttribute(
             'style',
             'position:absolute;text-align: right;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: translate(0%, -50%);transform: translate(0%, -50%);'
@@ -312,11 +313,17 @@
         }
 
         if (this.hasArrow) {
-          var pad = (0.04 * width) ;
-          this.copy.style.width = (width - (pad+s)) + "px";
+          var pad = 0.04 * width;
+          this.copy.style.width = width - (pad + s) + 'px';
         }
 
-        Utils.textFit(this.copy, {detectMultiLine: true, alignHoriz: true, alignVert: true, minFontSize: this.data.size || 1, maxFontSize: this.data.size || 12});
+        Utils.textFit(this.copy, {
+          detectMultiLine: true,
+          alignHoriz: true,
+          alignVert: true,
+          minFontSize: this.data.size || 1,
+          maxFontSize: this.data.size || 12
+        });
       }
     },
 
@@ -346,6 +353,7 @@
       }
     }
   });
-
-  document.registerElement(COMPONENT_NAME, { prototype: component });
+  if (document.createElement(COMPONENT_NAME).constructor.__proto__ !== window.HTMLElement) {
+    document.registerElement(COMPONENT_NAME, { prototype: component });
+  }
 })();

@@ -4,12 +4,13 @@
   "description": "Netflix CTA Web Component",
   "main": "main.js",
   "scripts": {
-    "pub": "np",
+    "pub": "np --any-branch",
     "version": "cd ../../ && npm run syncVersion"
   },
   "author": "Netflix",
   "license": "ISC",
   "dependencies": {
+    "@netflixadseng/pk-component-assets": "^2.0.4",
     "@netflixadseng/pk-component-utils": "latest"
   },
   "devDependencies": {

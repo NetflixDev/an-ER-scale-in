@@ -1,10 +1,8 @@
 node_modules/
-!dist/src/node_modules/
 bower_components/
 log.txt
 .DS_Store
 *.pyc
 !/dist
-*.gitignore
 .init
 npm-debug.log

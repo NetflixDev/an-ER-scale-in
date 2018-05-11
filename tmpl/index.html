@@ -1,16 +1,21 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="import" href="{{componentHtmlPath}}">
-	</head>
 
-	<body>
+<head>
+	<meta charset="utf-8">
+	{{externalScripts}}
+	{{cssLinks}}
+	<script type="text/javascript">
+		{{inlinedScripts}}
+	</script>
+</head>
 
-		<script>
-			var component = document.createElement('{{componentId}}');
-			component.preview();
-			document.body.appendChild(component);
-		</script>
-	</body>
+<body>
+	<script>
+		var component = document.createElement('{{componentId}}');
+		component.preview();
+		document.body.appendChild(component);
+	</script>
+</body>
+
 </html>

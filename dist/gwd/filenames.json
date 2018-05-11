@@ -4,5 +4,6 @@
   "node_modules/@netflixadseng/pk-component-utils/src/deviceUtils.js": "deviceUtils__304d.js",
   "node_modules/@netflixadseng/pk-component-utils/src/SvgIcon.js": "SvgIcon__c034.js",
   "NetflixCtaComponent.js": "NetflixCtaComponent__49b3.js",
-  "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb__0752.js"
+  "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb__0752.js",
+  "node_modules/@netflixadseng/pk-component-utils/src/DeviceUtils.js": "DeviceUtils__fe62.js"
 }

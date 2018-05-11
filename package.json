@@ -1,26 +1,28 @@
 {
   "name": "@netflixadseng/wc-netflix-cta",
-  "version": "1.5.0",
+  "version": "2.0.3",
   "description": "Netflix CTA Web Component",
   "scripts": {
-    "init": "node lib/api.js --cmd install",
     "postinstall": "cd src/ && npm install",
+    "init": "node lib/api.js --cmd install",
     "updateDeps": "cd src/ && npm update",
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
-    "dist": "npm run updateDeps && sh lib/confirm_env.sh 'node lib/api.js --cmd publish'",
-    "localhost": "sh lib/confirm_env.sh 'http-server ./dist -p 8000'",
-    "pub": "np",
+    "localhost": "sh lib/confirm_env.sh 'http-server ./ -p 8000'",
+    "dist": "npm run updateDeps && sh lib/confirm_env.sh 'node lib/api.js --cmd dist'",
+    "pub": "cd ./dist/npm && npm run pub",
+    "syncVersion": "node lib/api.js --cmd sync && npm run dist && npm run track && npm run commitRelease",
     "track": "node lib/api.js --cmd track",
-    "version": "npm run dist && npm run track && npm run gitCommit",
-    "gitCommit": "git add . && git commit -m 'update pkg ver'"
+    "commitRelease": "git add . && VER=`git describe --abbrev=0` && git commit -m $VER"
   },
   "repository": {
     "type": "git",
-    "url": "null"
+    "url": "https://github.com/NetflixAdsEng/wc-netflix-cta.git"
   },
+  "main": "./src/main.js",
   "devDependencies": {
     "archiver": "^1.3.0",
-    "debug": "git://github.com/gmcdev/debug.git",
+    "babel-eslint": "^8.2.3",
+    "debug": "git+https://github.com/gmcdev/debug.git",
     "escape-regexp": "0.0.1",
     "eslint": "^4.15.0",
     "eslint-config-prettier": "^2.9.0",
@@ -30,9 +32,9 @@
     "http-server": "^0.11.1",
     "jszip": "^3.1.5",
     "minimist": "^1.2.0",
+    "moment": "^2.22.1",
     "muffle": "^2.0.1",
     "ncp": "^2.0.0",
-    "np": "^2.18.3",
     "prettier": "^1.9.2",
     "prettier-eslint": "^8.7.1",
     "rimraf": "^2.6.1",
@@ -40,7 +42,7 @@
     "varname": "^2.0.3",
     "walk": "^2.3.9"
   },
-  "author": "netflix",
+  "author": "Netflix",
   "license": "ISC",
   "genericSource": {
     "id": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb",
@@ -49,15 +51,10 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1525288397414,
+    "updated": 1525476526104,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
     "username": "GitHub",
-    "version": "1.5.0"
-  },
-  "files": [
-    "dist",
-    "src",
-    "index.js"
-  ]
+    "version": "2.0.3"
+  }
 }

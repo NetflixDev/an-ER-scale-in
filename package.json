@@ -9,9 +9,10 @@
     "build": "sh lib/confirm_env.sh 'node lib/api.js --cmd build'",
     "localhost": "sh lib/confirm_env.sh 'http-server ./ -p 8000'",
     "dist": "npm run updateDeps && sh lib/confirm_env.sh 'node lib/api.js --cmd dist'",
-    "pub": "cd ./dist/npm && npm run pub",
-    "syncVersion": "node lib/api.js --cmd sync && npm run dist && npm run track && npm run commitRelease",
+    "pub": "npm run gitClean && cd ./dist/npm && npm run pub",
+    "syncVersion": "node lib/api.js --cmd sync && npm run track && npm run dist && npm run commitRelease",
     "track": "node lib/api.js --cmd track",
+    "gitClean": "git add -A && git commit -m 'commits misc before publish' || true && git push origin master",
     "commitRelease": "git add . && VER=`git describe --abbrev=0` && git commit -m $VER"
   },
   "repository": {

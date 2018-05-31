@@ -1,6 +1,6 @@
 {
   "name": "@netflixadseng/wc-netflix-cta",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Netflix CTA Web Component",
   "main": "main.js",
   "scripts": {

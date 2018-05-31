@@ -10,9 +10,9 @@ module.exports = {
   "type": "web_components",
   "context": "Default",
   "state": "published",
-  "updated": 1526055988818,
+  "updated": 1527806966605,
   "full_name": "NetflixAdsEng/wc-netflix-cta",
   "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
   "username": "GitHub",
-  "version": "2.0.3"
+  "version": "3.0.1"
 }

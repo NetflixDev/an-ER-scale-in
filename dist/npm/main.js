@@ -1,4 +1,3 @@
-import '@netflixadseng/pk-component-utils'
 import './NetflixCtaComponent.js'
 import './74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js'
 // IMPORTANT !!! Absolute URLs must be handled manually:

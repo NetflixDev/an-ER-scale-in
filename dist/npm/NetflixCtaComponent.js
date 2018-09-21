@@ -69,6 +69,7 @@
     createdCallback: {
       value: function() {
         this._attached = false;
+        this._hasInited = false;
         this._resizeQueued = false;
         this.button = document.createElement('div');
         this.button.className = 'button';

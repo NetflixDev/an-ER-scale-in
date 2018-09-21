@@ -10,66 +10,7 @@
 
 	<script type="text/javascript">
 		
-window.Utils = window.Utils || {}
-Utils.createStyle = function(nodeId, styles) {
-	var id = nodeId + '-component-stylesheet';
-	var stylesheet = document.getElementById(id) || this.stylesheet;
-	if (!stylesheet) {
-		stylesheet = document.createElement( 'style' );
-		stylesheet.type = 'text/css';
-		stylesheet.id = id;
-		this.appendChild(stylesheet);
-	}
-	var str = stylesheet.innerHTML;
-	
-	for ( var i = 0; i < arguments.length - 1; i += 2 ) {
-		
-		// if we want the value to be directly applied to the node
-		// eg. 'netflix-video.hide' vs 'netflix-video .hide'
-		// check if the first value in a pair is an array
-		// then use the first value as the key, the second as the boolean
-		var nameArg = arguments[i + 1];
-		var space = ' '
-		if (Array.isArray(nameArg)) {			
-			if (nameArg[1] === true) space = '';
-			nameArg = nameArg[0]
-		}
-
-		// strip out the white space after comma
-		var names = nameArg.replace( /\,\s+/g, ',' );
-		
-		str += nodeId + space
-		str += names;
-		str += ' { ' + ( arguments[ i + 2 ] || '' ) + ' }\n';
-	}
-
-	stylesheet.innerHTML = str;
-	this.stylesheet = stylesheet;	
-}
-window.Utils=window.Utils||{};
-Utils.textFit=function(e,k){function n(a,d){if(!("object"===typeof HTMLElement?a instanceof HTMLElement:a&&"object"===typeof a&&null!==a&&1===a.nodeType&&"string"===typeof a.nodeName)||!d.reProcess&&a.getAttribute("textFitted"))return!1;d.reProcess||a.setAttribute("textFitted",1);var c;var g=a.innerHTML;var b=window.getComputedStyle(a,null);var e=a.clientWidth-parseInt(b.getPropertyValue("padding-left"),10)-parseInt(b.getPropertyValue("padding-right"),10);b=window.getComputedStyle(a,null);var h=a.clientHeight-
-parseInt(b.getPropertyValue("padding-top"),10)-parseInt(b.getPropertyValue("padding-bottom"),10);if(!e||!d.widthOnly&&!h){if(d.widthOnly)throw Error("Set a static width on the target element "+a.outerHTML+" before using textFit!");throw Error("Set a static height and width on the target element "+a.outerHTML+" before using textFit!");}-1===g.indexOf("textFitted")?(b=document.createElement("span"),b.className="textFitted",b.style.display="inline-block",b.innerHTML=g,a.innerHTML="",a.appendChild(b)):
-(b=a.querySelector("span.textFitted"),l(b,"textFitAlignVert")&&(b.className=b.className.replace("textFitAlignVert",""),b.style.height="",a.className.replace("textFitAlignVertFlex","")));d.alignHoriz&&(a.style["text-align"]="center",b.style["text-align"]="center");g=d.multiLine;d.detectMultiLine&&!g&&b.scrollHeight>=2*parseInt(window.getComputedStyle(b)["font-size"],10)&&(g=!0);g||(a.style["white-space"]="nowrap");g=d.minFontSize+1;for(c=d.maxFontSize+1;g<=c;){var f=parseInt((g+c)/2,10);b.style.fontSize=
-f+"px";b.scrollWidth<=e&&(d.widthOnly||b.scrollHeight<=h)?g=f+1:c=f-1}b.style.fontSize=f-1+"px";d.alignVert&&(document.getElementById("textFitStyleSheet")||(f=document.createElement("style"),f.type="text/css",f.id="textFitStyleSheet",f.innerHTML=".textFitAlignVert{position: absolute;top: 0; right: 0; bottom: 0; left: 0;margin: auto;display: flex;justify-content: center;flex-direction: column;}.textFitAlignVertFlex{display: flex;}.textFitAlignVertFlex .textFitAlignVert{position: static;}",document.body.appendChild(f)),
-f=b.scrollHeight,"static"===window.getComputedStyle(a).position&&(a.style.position="relative"),l(b,"textFitAlignVert")||(b.className+=" textFitAlignVert"),b.style.height=f+"px",d.alignVertWithFlexbox&&!l(a,"textFitAlignVertFlex")&&(a.className+=" textFitAlignVertFlex"))}function l(a,c){return-1<(" "+a.className+" ").indexOf(" "+c+" ")}console.log(arguments);"use strict";var c={alignVert:!1,alignHoriz:!1,multiLine:!1,detectMultiLine:!0,minFontSize:6,maxFontSize:80,reProcess:!0,widthOnly:!1,alignVertWithFlexbox:!1};
-k||(k={});var m={},h;for(h in c)k.hasOwnProperty(h)?m[h]=k[h]:m[h]=c[h];"function"===typeof e.toArray&&(e=e.toArray());c=Object.prototype.toString.call(e);"[object Array]"!==c&&"[object NodeList]"!==c&&"[object HTMLCollection]"!==c&&(e=[e]);for(c=0;c<e.length;c++)n(e[c],m)};window.Utils = window.Utils || {}
-
-Utils.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-Utils.isiOS    = /iPad|iPhone|iPod/.test(navigator.userAgent);
-Utils.isiOS9up = Utils.isiOS && ((navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/)[1] > 9);
-Utils.isiPad   = /iPad/.test(navigator.userAgent);
-Utils.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);window.Utils = window.Utils || {}
-Utils.SvgIcon = function(id, path, color) {
-	var i = document.createElementNS("http://www.w3.org/2000/svg", "path");
-	i.setAttributeNS(null, "d", path);
-	i.setAttribute("data-original", path);
-	if (color != undefined) {
-		i.setAttribute('fill', color);
-	}
-	i.setAttribute("class", id || "");
-	return i;
-};(function() {
+!(function() {
   var COMPONENT_NAME = 'netflix-cta';
   var PREFIX = 'mm-component';
 
@@ -140,6 +81,7 @@ Utils.SvgIcon = function(id, path, color) {
     createdCallback: {
       value: function() {
         this._attached = false;
+        this._hasInited = false;
         this._resizeQueued = false;
         this.button = document.createElement('div');
         this.button.className = 'button';
@@ -440,11 +382,11 @@ module.exports = {
   "type": "web_components",
   "context": "Default",
   "state": "published",
-  "updated": 1525288397020,
+  "updated": 1531344943233,
   "full_name": "NetflixAdsEng/wc-netflix-cta",
   "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
   "username": "GitHub",
-  "version": "1.5.0"
+  "version": "4.0.0"
 }
 
 	</script>

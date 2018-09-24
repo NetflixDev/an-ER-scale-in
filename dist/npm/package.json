@@ -1,6 +1,6 @@
 {
   "name": "@netflixadseng/wc-netflix-cta",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Netflix CTA Web Component",
   "main": "main.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "author": "Netflix",
   "license": "ISC",
   "dependencies": {
-    "@netflixadseng/pk-component-utils": "latest"
+    "@netflixadseng/pk-component-utils": "^3.0.1"
   },
   "devDependencies": {
     "np": "^2.18.3"

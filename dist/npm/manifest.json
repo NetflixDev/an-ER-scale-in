@@ -2,7 +2,7 @@
   "name": "Netflix CTA",
   "type": "netflix-cta",
   "tagName": "netflix-cta",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Netflix branded CTA button.",
   "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
   "files": {

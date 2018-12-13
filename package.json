@@ -1,6 +1,6 @@
 {
   "name": "@netflixadseng/wc-netflix-cta",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Netflix CTA Web Component",
   "scripts": {
     "postinstall": "cd src/ && npm install",
@@ -53,11 +53,11 @@
     "type": "web_components",
     "context": "Default",
     "state": "published",
-    "updated": 1543347188462,
+    "updated": 1544728897134,
     "full_name": "NetflixAdsEng/wc-netflix-cta",
     "html_url": "https://github.com/NetflixAdsEng/wc-netflix-cta",
     "username": "GitHub",
-    "version": "4.0.1",
+    "version": "5.0.0",
     "minimum": "3.0.0"
   }
 }

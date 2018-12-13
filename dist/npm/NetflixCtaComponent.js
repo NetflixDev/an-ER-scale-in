@@ -236,10 +236,9 @@
         }
 
         this.button.appendChild(this.copy);
-
-        this.hasArrow = this.hasAttribute('arrow');
-        this.hasBorder = this.hasAttribute('border');
-        this.borderSize = this.getAttribute('border') || 1;
+        this.hasArrow = this._hasTruthyAttribute('arrow');
+        this.hasBorder = this.hasAttribute('border-size');
+        this.borderSize = this.getAttribute('border-size') || 1;
 
         if (this.hasArrow) {
           this.button.appendChild(this.arrow);
@@ -360,9 +359,14 @@
     text: {
       value: function(text) {
         var copyText = text || this.copy.innerHTML;
-        copyText = copyText && copyText.toUpperCase && copyText.toUpperCase();
         this.copy.innerHTML = copyText;
         this.resize();
+      }
+    },
+
+    _hasTruthyAttribute: {
+      value: function(attr) {
+        return this.hasAttribute(attr) && this.getAttribute(attr).toString() !== 'false';
       }
     },
 
@@ -384,7 +388,7 @@
         }
 
         this._resizeQueued = false;
-        this.rtl = this.getAttribute('rtl');
+        this.rtl = this._hasTruthyAttribute('rtl');
 
         if (this.rtl) {
           TweenMax.set(this.copy, {
@@ -464,7 +468,14 @@
         // update multiLine status
         this._multiLine = !!options.tryingMultiLine;
 
-        if (options.stopRetrying || (options.tryingStretch && options.tryingMultiLine)) {
+        var noMultiline = this._hasTruthyAttribute('no-multiline');
+        if (
+          options.stopRetrying ||
+          (options.tryingStretch && options.tryingMultiLine) ||
+          // trying stretch without multiline is the step before multiline rendering
+          // if 'no-multiline' is set, stop resizing here
+          (options.tryingStretch && !options.tryingMultiLine && noMultiline)
+        ) {
           this._applyCopyFixes();
           return;
         }
@@ -552,7 +563,7 @@
     preview: {
       value: function() {
         this.setAttribute('arrow', '');
-        this.setAttribute('border', '');
+        this.setAttribute('border-size', '');
         this.setAttribute('size', 12);
       }
     },
@@ -564,7 +575,7 @@
         var parsedXFix = parseFloat(xFix);
         var parsedYFix = parseFloat(yFix);
         // whether to apply copy-y-fix to copy on multiple lines
-        var yFixOnMultiLine = this.getAttribute('y-fix-on-multiLine') !== null;
+        var yFixOnMultiLine = this._hasTruthyAttribute('y-fix-on-multiLine');
 
         if (parsedXFix || parsedYFix) {
           TweenMax.set(this.copy, {

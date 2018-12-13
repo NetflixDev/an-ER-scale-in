@@ -2,11 +2,14 @@
   "name": "Netflix CTA",
   "type": "netflix-cta",
   "tagName": "netflix-cta",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Netflix branded CTA button.",
   "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
   "files": {
-    "js": ["NetflixCtaComponent.js", "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"]
+    "js": [
+      "NetflixCtaComponent.js",
+      "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"
+    ]
   },
   "externalScripts": [
     "https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js"

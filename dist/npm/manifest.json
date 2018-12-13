@@ -2,22 +2,42 @@
   "name": "Netflix CTA",
   "type": "netflix-cta",
   "tagName": "netflix-cta",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Netflix branded CTA button.",
   "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
   "files": {
-    "js": ["NetflixCtaComponent.js", "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"]
+    "js": [
+      "NetflixCtaComponent.js",
+      "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"
+    ]
   },
   "externalScripts": [
     "https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js"
   ],
   "attributes": [
     {
-      "name": "rtl",
-      "label": "Right-to-left text",
-      "type": "boolean",
-      "required": false,
-      "description": "Right-to-left text."
+      "name": "width",
+      "label": "Width",
+      "type": "number",
+      "required": true,
+      "description": "Set the width of the component",
+      "defaultValue": 96,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    },
+    {
+      "name": "height",
+      "label": "Height",
+      "type": "number",
+      "required": true,
+      "description": "Set the height of the component",
+      "defaultValue": 28,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
     },
     {
       "name": "color-1",
@@ -34,34 +54,6 @@
       "required": true,
       "defaultValue": "#ffffff",
       "description": "The color of the mouseover."
-    },
-    {
-      "name": "arrow",
-      "label": "Arrow",
-      "type": "boolean",
-      "required": false,
-      "description": "Set true to enable the arrow."
-    },
-    {
-      "name": "border",
-      "label": "Border",
-      "type": "number",
-      "required": false,
-      "description": "Set true to enable the border."
-    },
-    {
-      "name": "background-image",
-      "label": "Bg Image",
-      "type": "string",
-      "required": false,
-      "description": "Set a background image."
-    },
-    {
-      "name": "background-image-hover",
-      "label": "Bg Image Hover",
-      "type": "string",
-      "required": false,
-      "description": "Set a background image for rollover state."
     },
     {
       "name": "font-size",
@@ -88,30 +80,6 @@
       "advanced": true
     },
     {
-      "name": "width",
-      "label": "Width",
-      "type": "number",
-      "required": true,
-      "description": "Set the width of the component",
-      "defaultValue": 96,
-      "gwdSpecific": {
-        "important": true
-      },
-      "advanced": true
-    },
-    {
-      "name": "height",
-      "label": "Height",
-      "type": "number",
-      "required": true,
-      "description": "Set the height of the component",
-      "defaultValue": 28,
-      "gwdSpecific": {
-        "important": true
-      },
-      "advanced": true
-    },
-    {
       "name": "max-width",
       "label": "Max Width",
       "type": "number",
@@ -122,6 +90,59 @@
         "important": true
       },
       "advanced": true
+    },
+    {
+      "name": "no-multiline",
+      "label": "No Multiline",
+      "type": "boolean",
+      "required": false,
+      "description": "Prevents any multiline rendering routines."
+    },
+    {
+      "name": "arrow",
+      "label": "Arrow",
+      "type": "boolean",
+      "required": false,
+      "description": "Set true to enable the arrow."
+    },
+    {
+      "name": "border-size",
+      "label": "Border Size",
+      "type": "number",
+      "required": false,
+      "description": "Sets size of the border in px. Leaving this value blank will remove the border on the CTA."
+    },
+    {
+      "name": "background-image",
+      "label": "Bg Image",
+      "type": "string",
+      "required": false,
+      "description": "Set a background image."
+    },
+    {
+      "name": "background-image-hover",
+      "label": "Bg Image Hover",
+      "type": "string",
+      "required": false,
+      "description": "Set a background image for rollover state."
+    },
+    {
+      "name": "stretch-origin",
+      "label": "Stretch Origin",
+      "type": "string",
+      "required": false,
+      "description": "Similar to the transform-origin CSS property, this defines the point from which the CTA stretches",
+      "defaultValue": "left",
+      "gwdSpecific": {
+        "important": true
+      }
+    },
+    {
+      "name": "rtl",
+      "label": "Right-to-left text",
+      "type": "boolean",
+      "required": false,
+      "description": "Right-to-left text."
     },
     {
       "name": "copy-x-fix",
@@ -146,17 +167,6 @@
         "important": true
       },
       "advanced": true
-    },
-    {
-      "name": "stretch-origin",
-      "label": "Stretch Origin",
-      "type": "string",
-      "required": false,
-      "description": "Similar to the transform-origin CSS property, this defines the point from which the CTA stretches",
-      "defaultValue": "left",
-      "gwdSpecific": {
-        "important": true
-      }
     },
     {
       "name": "horizontal-pad",

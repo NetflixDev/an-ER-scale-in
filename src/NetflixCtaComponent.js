@@ -1,10 +1,88 @@
 !(function() {
   var COMPONENT_NAME = 'netflix-cta';
   var PREFIX = 'mm-component';
+  var TRANSITION_EASING = '.4s cubic-bezier(0.19, 1, 0.22, 1)';
+  // the proportion of padding right of the CTA arrow to the CTA width
+  var ARROW_PADDING_TO_WIDTH = 0.04;
+  // list of attributes that affect CTA layout
+  var LAYOUT_ATTRIBUTE_LIST = [
+    'width',
+    'height',
+    'font',
+    'font-size',
+    'min-font-size',
+    'max-width',
+    'stretch-direction',
+    'arrow'
+  ];
+
+  function stretchStrToPercent(stretchStr) {
+    if (!stretchStr || stretchStr === 'left') {
+      return 0;
+    } else if (stretchStr === 'center') {
+      return 0.5;
+    } else if (stretchStr === 'right') {
+      return 1;
+    }
+
+    // if it ends with %...
+    if (stretchStr.indexOf('%') === stretchStr.length - 1) {
+      var stretchPercent = parseFloat(stretchStr);
+      // and is valid num...
+      if (!isNaN(stretchPercent)) {
+        return stretchPercent / 100;
+      }
+    }
+    return 0;
+  }
+
+  function parsePaddingAttr(padAttr) {
+    if (typeof padAttr === 'number') {
+      return padAttr + 'px';
+    }
+
+    var parsedNum = parseFloat(padAttr);
+    // is number string --> convert to px
+    if (!isNaN(parsedNum) && /^(\d|\.)+$/.test(padAttr)) {
+      return parsedNum + 'px';
+    }
+    return padAttr;
+  }
+
+  function horizontalPadding(el) {
+    var style = window.getComputedStyle(el, null);
+    return parseInt(style.getPropertyValue('padding-left'), 10) + parseInt(style.getPropertyValue('padding-right'), 10);
+  }
+
+  // Calculate width without padding.
+  function innerWidth(el) {
+    var style = window.getComputedStyle(el, null);
+    return (
+      el.clientWidth -
+      parseInt(style.getPropertyValue('padding-left'), 10) -
+      parseInt(style.getPropertyValue('padding-right'), 10)
+    );
+  }
+
+  // Calculate height without padding.
+  function innerHeight(el) {
+    var style = window.getComputedStyle(el, null);
+    return (
+      el.clientHeight -
+      parseInt(style.getPropertyValue('padding-top'), 10) -
+      parseInt(style.getPropertyValue('padding-bottom'), 10)
+    );
+  }
 
   function style() {
     // use unique class name as identifier because there are dynamic values in the generated stylesheet
     var UNIQUE_CLASS_NAME = 'uc-' + (Math.random() * 1000000).toFixed(0);
+
+    var horizPaddingAttr = this.getAttribute('horizontal-pad');
+    var vertPaddingAttr = this.getAttribute('vertical-pad');
+
+    var horizPadding = parsePaddingAttr(horizPaddingAttr) || '4%';
+    var vertPadding = parsePaddingAttr(vertPaddingAttr) || '2%';
 
     Utils.createStyle.call(
       this,
@@ -17,13 +95,28 @@
       '*',
       'box-sizing: border-box;',
       '.button .fill',
-      'will-change: transform;width:100%;height:100%;transform-origin:top left;-webkit-transform-origin:top left;transform: scale(0, 1);-webkit-transform: scale(0, 1); transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);',
+      'will-change: transform;width:100%;height:100%;transform-origin:top left;-webkit-transform-origin:top left;transform: scale(0, 1);-webkit-transform: scale(0, 1); transition: transform ' +
+        TRANSITION_EASING +
+        ';',
       '.button .arrow',
       'will-change: transform;position:absolute;text-align: right;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: translate(0%, -50%);transform: translate(0%, -50%);',
       '.button .arrow svg',
-      'position:absolute;right:4%;left:auto;top:0;',
+      'position:absolute;right:' + ARROW_PADDING_TO_WIDTH * 100 + '%;left:auto;top:0;',
       '.button .copy',
-      'will-change: transform;transform-origin: 0 0;white-space:nowrap;letter-spacing:1.1px;padding:2% 4%;transition: color .4s cubic-bezier(0.19, 1, 0.22, 1);color:' +
+      'will-change: transform;transform-origin: 0 0;letter-spacing:1.1px' +
+        // setting each padding independently
+        // in case, either padding vars are invalid in CSS
+        ';padding-top:' +
+        vertPadding +
+        ';padding-bottom:' +
+        vertPadding +
+        ';padding-left:' +
+        horizPadding +
+        ';padding-right:' +
+        horizPadding +
+        ';transition: color ' +
+        TRANSITION_EASING +
+        ';color:' +
         this.data.color[1],
       '.button .border',
       '-webkit-box-sizing: border-box;box-sizing: border-box;position: absolute;top: 0;left: 0;width:100%;height:100%;border:solid ' +
@@ -104,7 +197,8 @@
 
         this.data = {};
         this.data.color = [this.getAttribute('color-1') || '#e50914', this.getAttribute('color-2') || '#ffffff'];
-        this.data.size = parseInt(this.getAttribute('font-size'), 10) || null;
+        this.data.size = parseInt(this.getAttribute('font-size'), 10) || 12;
+        this.data.minSize = parseInt(this.getAttribute('min-font-size'), 10) || 8;
         this.data.font = (this.getAttribute('font') || 'Netflix Sans') + ', Arial, sans-serif';
         this.data.text = this.getAttribute('text');
 
@@ -134,16 +228,17 @@
             'style',
             'position: absolute; top:0;left:0;width:0%;overflow:hidden;height:' +
               this.height +
-              'px; transition: width .4s cubic-bezier(0.19, 1, 0.22, 1);'
+              'px; transition: width ' +
+              TRANSITION_EASING +
+              ';'
           );
           this.fill.setAttribute('style', 'display:none;');
         }
 
         this.button.appendChild(this.copy);
-
-        this.hasArrow = this.hasAttribute('arrow');
-        this.hasBorder = this.hasAttribute('border');
-        this.borderSize = this.getAttribute('border') || 1;
+        this.hasArrow = this._hasTruthyAttribute('arrow');
+        this.hasBorder = this.hasAttribute('border-size');
+        this.borderSize = this.getAttribute('border-size') || 1;
 
         if (this.hasArrow) {
           this.button.appendChild(this.arrow);
@@ -225,13 +320,19 @@
                     this.dispatchEvent(new CustomEvent('ready'));
                   }.bind(this),
                   function(error) {
-                    Monet.logEvent('MONET_DATA_ERROR', { details: 'Failed to load backup Monet data', stack: error });
+                    Monet.logEvent('MONET_DATA_ERROR', {
+                      details: 'Failed to load backup Monet data',
+                      stack: error
+                    });
                   }
                 );
               }
             }.bind(this),
             function(error) {
-              Monet.logEvent('MONET_DATA_ERROR', { details: 'Failed to load backup Monet data', stack: error });
+              Monet.logEvent('MONET_DATA_ERROR', {
+                details: 'Failed to load backup Monet data',
+                stack: error
+              });
             }
           );
         } else {
@@ -242,27 +343,44 @@
     },
 
     attributeChangedCallback: {
-      value: function() {
+      value: function(attrName, oldVal, newVal) {
         if (!this._attached) {
           return;
         }
-        if (arguments[0] === 'font-size') {
-          this.data.size = parseInt(arguments[2], 10) || null;
+
+        // if change in an attribute that affects layout
+        if (LAYOUT_ATTRIBUTE_LIST.indexOf(attrName) >= 0 && oldVal !== newVal) {
+          this.resize();
         }
-        this.resize();
       },
       enumerable: true
     },
 
     text: {
       value: function(text) {
-        this.copy.innerHTML = text || this.copy.innerHTML;
+        var copyText = text || this.copy.innerHTML;
+        this.copy.innerHTML = copyText;
         this.resize();
       }
     },
 
+    _hasTruthyAttribute: {
+      value: function(attr) {
+        return this.hasAttribute(attr) && this.getAttribute(attr).toString() !== 'false';
+      }
+    },
+
     resize: {
-      value: function(w, h) {
+      value: function(w, h, options) {
+        /* 
+        Resize options:
+        - tryingMultiLine - try putting copy on multiple lines
+        - tryingStretch - try stretching CTA width
+        - originalWidth - first width to try when resizing w/ multiple lines
+        - stopRetrying - discontinue resizing routine. Mostly for debugging purposes
+        */
+        options = options || {};
+
         // queue resize when the element is back in the dom
         if (!this._attached) {
           this._resizeQueued = true;
@@ -270,27 +388,45 @@
         }
 
         this._resizeQueued = false;
-        this.rtl = this.getAttribute('rtl');
+        this.rtl = this._hasTruthyAttribute('rtl');
 
         if (this.rtl) {
-          TweenMax.set(this.copy, { css: { right: 0, left: 'auto' } });
+          TweenMax.set(this.copy, {
+            css: {
+              right: 0,
+              left: 'auto'
+            }
+          });
           this.arrow.setAttribute(
             'style',
             'position:absolute;text-align: left;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: scale(-1,1) translate(0%, -50%);transform: scale(-1,1) translate(0%, -50%);'
           );
         } else {
-          TweenMax.set(this.copy, { css: { right: 'auto', left: 0 } });
+          TweenMax.set(this.copy, {
+            css: {
+              right: 'auto',
+              left: 0
+            }
+          });
           this.arrow.setAttribute(
             'style',
             'position:absolute;text-align: right;top:50%;left:auto;right:auto;width:100%;font-size:160% !important;-webkit-transform: translate(0%, -50%);transform: translate(0%, -50%);'
           );
         }
 
-        var width = w || (this.getAttribute('width') || (this.offsetWidth || 109));
+        var parsedWidth = parseInt(this.getAttribute('width'), 10);
+        var maxWidth = parseInt(this.getAttribute('max-width'), 10) || 140;
+
+        parsedWidth = isNaN(parsedWidth) ? null : parsedWidth;
+
+        // taking minimum of width and max-width in case someone puts lower max width then width
+        var width = w || parsedWidth || (this.offsetWidth || 109);
         var height = h || (this.getAttribute('height') || (this.offsetHeight || 28));
+        width = Math.min(width, maxWidth);
 
         this.copy.style.width = this.button.style.width = this.style.width = width + 'px';
         this.copy.style.height = this.button.style.height = this.style.height = height + 'px';
+        this.copy.style.whiteSpace = options.tryingMultiLine ? 'normal' : 'nowrap';
 
         this.height = height;
         if (this._attached) {
@@ -313,18 +449,96 @@
           this.arrow.appendChild(elem);
         }
 
+        // padding around sides
+        var sidePad = ARROW_PADDING_TO_WIDTH * width;
         if (this.hasArrow) {
-          var pad = 0.04 * width;
-          this.copy.style.width = width - (pad + s) + 'px';
+          this.copy.style.width = width - (sidePad + s) + 'px';
         }
 
         Utils.textFit(this.copy, {
           detectMultiLine: true,
+          multiLine: options.tryingMultiLine,
           alignHoriz: true,
           alignVert: true,
-          minFontSize: this.data.size || 1,
-          maxFontSize: this.data.size || 12
+          // subtracting by 1 since textFit bumps up font sizes by 1 internally
+          minFontSize: this.data.minSize,
+          maxFontSize: this.data.size
         });
+
+        // update multiLine status
+        this._multiLine = !!options.tryingMultiLine;
+
+        var noMultiline = this._hasTruthyAttribute('no-multiline');
+        if (
+          options.stopRetrying ||
+          (options.tryingStretch && options.tryingMultiLine) ||
+          // trying stretch without multiline is the step before multiline rendering
+          // if 'no-multiline' is set, stop resizing here
+          (options.tryingStretch && !options.tryingMultiLine && noMultiline)
+        ) {
+          this._applyCopyFixes();
+          return;
+        }
+
+        var span = this.copy.querySelector('span');
+
+        // temporarily allow span to wrap around text
+        var prevPosition = span.style.position;
+        var prevDisplay = span.style.display;
+        span.style.position = 'static';
+        span.style.display = 'inline';
+        var spanWidth = span.offsetWidth;
+
+        // then remove element styling
+        span.style.position = prevPosition;
+        span.style.display = prevDisplay;
+
+        var spanHeight = span.offsetHeight;
+
+        var copyContainerWidth = innerWidth(this.copy);
+        var copyContainerHeight = innerHeight(this.copy);
+        var copyExcessWidth = spanWidth - copyContainerWidth;
+        var copyExcessHeight = spanHeight - copyContainerHeight;
+
+        var fontSize = getComputedStyle(this.copy).fontSize;
+
+        // if copy bleeds beyond container
+        // also implies copy is at minimum font size since textFit utility will try
+        // to use min font size to try fitting copy to CTA
+        if (copyExcessWidth > 0 || copyExcessHeight > 0) {
+          if (!options.tryingStretch) {
+            var extraWidth = copyExcessWidth + horizontalPadding(this.copy);
+            var potentialNewWidth = width + extraWidth;
+            // if CTA height being exceeded,
+            // just set newWidth to maxWidth
+            // since can't get the exact ideal width
+            // to accomodate multiline copy
+            var newWidth = copyExcessHeight > 0 ? maxWidth : Math.min(maxWidth, potentialNewWidth);
+            this.resize(newWidth, null, {
+              originalWidth: width,
+              tryingStretch: true,
+              tryingMultiLine: options.tryingMultiLine
+            });
+
+            // default behavior: stretches from left
+            var stretchOrigin = this.getAttribute('stretch-origin');
+            var percentOrigin = stretchStrToPercent(stretchOrigin);
+
+            if (percentOrigin > 0) {
+              TweenMax.set(this, {
+                x: '-=' + extraWidth * percentOrigin
+              });
+            }
+          } else if (!options.tryingMultiLine) {
+            this.resize(options.originalWidth, null, {
+              originalWidth: options.originalWidth,
+              tryingStretch: false,
+              tryingMultiLine: true
+            });
+          }
+        } else {
+          this._applyCopyFixes();
+        }
       }
     },
 
@@ -349,12 +563,34 @@
     preview: {
       value: function() {
         this.setAttribute('arrow', '');
-        this.setAttribute('border', '');
+        this.setAttribute('border-size', '');
         this.setAttribute('size', 12);
+      }
+    },
+
+    _applyCopyFixes: {
+      value: function() {
+        var xFix = this.getAttribute('copy-x-fix');
+        var yFix = this.getAttribute('copy-y-fix');
+        var parsedXFix = parseFloat(xFix);
+        var parsedYFix = parseFloat(yFix);
+        // whether to apply copy-y-fix to copy on multiple lines
+        var yFixOnMultiLine = this._hasTruthyAttribute('y-fix-on-multiLine');
+
+        if (parsedXFix || parsedYFix) {
+          TweenMax.set(this.copy, {
+            x: xFix ? '+=' + parsedXFix : 0,
+            y: yFix && (!this._multiLine || yFixOnMultiLine) ? '+=' + parsedYFix : 0
+          });
+        }
       }
     }
   });
+
+  component.observedAttributes = LAYOUT_ATTRIBUTE_LIST;
   if (document.createElement(COMPONENT_NAME).constructor.__proto__ !== window.HTMLElement) {
-    document.registerElement(COMPONENT_NAME, { prototype: component });
+    document.registerElement(COMPONENT_NAME, {
+      prototype: component
+    });
   }
 })();

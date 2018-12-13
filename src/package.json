@@ -1,18 +1,15 @@
 {
-  "name": "@netflixadseng/wc-netflix-cta",
-  "version": "4.0.1",
-  "description": "Netflix CTA Web Component",
-  "main": "main.js",
-  "scripts": {
-    "pub": "np",
-    "version": "cd ../../ && npm run syncVersion"
-  },
-  "author": "Netflix",
-  "license": "ISC",
-  "dependencies": {
-    "@netflixadseng/pk-component-utils": "^3.0.1"
-  },
-  "devDependencies": {
-    "np": "^2.18.3"
-  }
+	"name": "@netflixadseng/wc-netflix-cta",
+	"version": "4.0.1",
+	"description": "Netflix CTA Web Component",
+	"main": "main.js",
+	"scripts": {
+		"pub": "np",
+		"version": "cd ../../ && npm run syncVersion"
+	},
+	"author": "Netflix",
+	"license": "ISC",
+	"devDependencies": {
+		"np": "^2.18.3"
+	}
 }

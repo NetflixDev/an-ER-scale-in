@@ -6,10 +6,7 @@
   "description": "Netflix branded CTA button.",
   "genericSourceId": "1cf958c0-fcb8-4348-ab1a-5ae052a68b9a",
   "files": {
-    "js": [
-      "NetflixCtaComponent.js",
-      "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"
-    ]
+    "js": ["NetflixCtaComponent.js", "74ac09b5-4f74-4b37-b4d1-7955ed4994fb.js"]
   },
   "externalScripts": [
     "https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js"
@@ -54,14 +51,14 @@
     },
     {
       "name": "background-image",
-      "label": "Bg image",
+      "label": "Bg Image",
       "type": "string",
       "required": false,
       "description": "Set a background image."
     },
     {
       "name": "background-image-hover",
-      "label": "Bg image hover",
+      "label": "Bg Image Hover",
       "type": "string",
       "required": false,
       "description": "Set a background image for rollover state."
@@ -79,8 +76,20 @@
       "advanced": true
     },
     {
+      "name": "min-font-size",
+      "label": "Min Font Size",
+      "type": "number",
+      "required": false,
+      "description": "Set a min font size",
+      "defaultValue": 8,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    },
+    {
       "name": "width",
-      "label": "width",
+      "label": "Width",
       "type": "number",
       "required": true,
       "description": "Set the width of the component",
@@ -92,7 +101,7 @@
     },
     {
       "name": "height",
-      "label": "height",
+      "label": "Height",
       "type": "number",
       "required": true,
       "description": "Set the height of the component",
@@ -101,6 +110,82 @@
         "important": true
       },
       "advanced": true
+    },
+    {
+      "name": "max-width",
+      "label": "Max Width",
+      "type": "number",
+      "required": true,
+      "description": "Set the max width that the component can stretch to",
+      "defaultValue": 140,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    },
+    {
+      "name": "copy-x-fix",
+      "label": "Copy X Fix",
+      "type": "string",
+      "required": false,
+      "description": "Horizontal nudge to adjust copy within CTA, in terms of px",
+      "defaultValue": 0,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    },
+    {
+      "name": "copy-y-fix",
+      "label": "Copy Y Fix",
+      "type": "string",
+      "required": false,
+      "description": "Vertical nudge to adjust copy within CTA, in terms of px",
+      "defaultValue": 0,
+      "gwdSpecific": {
+        "important": true
+      },
+      "advanced": true
+    },
+    {
+      "name": "stretch-origin",
+      "label": "Stretch Origin",
+      "type": "string",
+      "required": false,
+      "description": "Similar to the transform-origin CSS property, this defines the point from which the CTA stretches",
+      "defaultValue": "left",
+      "gwdSpecific": {
+        "important": true
+      }
+    },
+    {
+      "name": "horizontal-pad",
+      "label": "Horizontal Pad",
+      "type": "string",
+      "required": false,
+      "description": "Defines the copy's horizontal padding",
+      "defaultValue": "4%",
+      "gwdSpecific": {
+        "important": true
+      }
+    },
+    {
+      "name": "vertical-pad",
+      "label": "Vertical Pad",
+      "type": "string",
+      "required": false,
+      "description": "Defines the copy's vertical padding",
+      "defaultValue": "2%",
+      "gwdSpecific": {
+        "important": true
+      }
+    },
+    {
+      "name": "y-fix-on-multiline",
+      "label": "Y Fix on Multiline?",
+      "type": "boolean",
+      "required": false,
+      "description": "Determines whether to apply copy-y-fix to copy on multiple lines"
     },
     {
       "name": "data-dynamic-key",

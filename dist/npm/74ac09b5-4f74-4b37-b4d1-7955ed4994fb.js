@@ -1,8 +1,8 @@
 // GENERIC SOURCE TRACKER: wc-netflix-cta
 if (typeof module === 'undefined') {
-	module = {}
+  module = {};
 }
-
+// prettier-ignore
 module.exports = {
   "id": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb",
   "name": "wc-netflix-cta",

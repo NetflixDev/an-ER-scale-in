@@ -11,8 +11,8 @@ module.exports = {
   "context": "Default",
   "state": "published",
   "updated": 1544728889095,
-  "full_name": "NetflixAdsEng/an-test",
-  "html_url": "https://github.com/NetflixAdsEng/an-test",
+  "full_name": "NetflixDev/an-test",
+  "html_url": "https://github.com/NetflixDev/an-test",
   "username": "GitHub",
   "version": "5.0.0",
   "minimum": "3.0.0"

@@ -4,7 +4,7 @@ if (typeof module === 'undefined') {
 }
 // prettier-ignore
 module.exports = {
-  "id": "74ac09b5-4f74-4b37-b4d1-7955ed4994fb",
+  "id": "c64f2f0a-32dd-4379-9742-2fd3587f0255",
   "name": "an-endframe-fade-in",
   "description": "CTA button",
   "type": "animations",

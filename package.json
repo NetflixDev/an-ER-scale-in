@@ -1,7 +1,7 @@
 {
-  "name": "@netflixadseng/an-endframe-fade-in",
-  "version": "5.0.0",
-  "description": "Netflix Animation: Endframe Fade-in",
+  "name": "@netflixadseng/an-ER-scale-in",
+  "version": "1.0.0",
+  "description": "Netflix Animation: Endframe Scale-in",
   "scripts": {
     "init": "node lib/api.js --cmd install",
     "localhost": "sh lib/confirm_env.sh 'http-server ./ -p 8000'",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NetflixAdsEng/an-endframe-fade-in.git"
+    "url": "https://github.com/NetflixAdsEng/an-ER-scale-in.git"
   },
   "main": "./src/main.js",
   "devDependencies": {
@@ -44,18 +44,18 @@
   "author": "Netflix",
   "license": "ISC",
   "genericSource": {
-    "id": "c64f2f0a-32dd-4379-9742-2fd3587f0255",
+    "id": "25fd746d-ca30-41d7-b005-4bcd499d6335",
     "compatibility": [
       "8c417243-849b-4868-8eb9-91063e2f3d80"
     ],
-    "name": "an-endframe-fade-in",
-    "description": "Half-second fade-in",
+    "name": "an-ER-scale-in",
+    "description": "Half-second scale-in",
     "type": "animations",
     "context": "Default",
     "state": "published",
-    "updated": 1550200393210,
-    "full_name": "NetflixDev/an-endframe-fade-in",
-    "html_url": "https://github.com/NetflixDev/an-endframe-fade-in",
+    "updated": 1551292905477,
+    "full_name": "NetflixDev/an-ER-scale-in",
+    "html_url": "https://github.com/NetflixDev/an-ER-scale-in",
     "username": "GitHub",
     "version": "5.0.0",
     "minimum": "3.0.0"

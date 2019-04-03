@@ -1,7 +1,7 @@
 {
-	"name": "@netflixadseng/an-endframe-fade-in",
+	"name": "@netflixadseng/an-ER-scale-in",
 	"version": "1.0.0",
-	"description": "Netflix Animation: Endframe Fade-in",
+	"description": "Netflix Animation: Endframe Scale-in",
 	"main": "creative.js",
 	"scripts": {
 		"pub": "np",

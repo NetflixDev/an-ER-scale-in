@@ -48,7 +48,7 @@
     "name": "an-ER-scale-in",
     "description": "Half-second scale-in",
     "type": "animations",
-    "build": {
+    "builder": {
       "label": "Scale-In",
       "compatibility": [
         "8c417243-849b-4868-8eb9-91063e2f3d80",
@@ -60,7 +60,7 @@
     },
     "context": "Default",
     "state": "published",
-    "updated": 1556153396286,
+    "updated": 1556154330150,
     "full_name": "NetflixDev/an-ER-scale-in",
     "html_url": "https://github.com/NetflixDev/an-ER-scale-in",
     "username": "GitHub",

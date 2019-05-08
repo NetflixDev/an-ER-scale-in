@@ -3,7 +3,7 @@ var Creative = function() {
     console.log('Creative.play()');
 
     TweenLite.from(View.endFrame.tt, 0.5, { scale: 2, delay: 0 });
-    TweenLite.from(View.endFrame.keyart, 0.5, { scale: 2, delay: 0 });
+    TweenLite.from(View.endFrame.background, 0.5, { scale: 2, delay: 0 });
     TweenLite.from(View.endFrame.tuneIn, 0.5, { scale: 2, delay: 0 });
     TweenLite.from(View.endFrame.ftm, 0.5, { scale: 2, delay: 0 });
     TweenLite.from(View.endFrame.netflixLogo, 0.5, { scale: 2, delay: 0 });

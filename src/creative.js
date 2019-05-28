@@ -2,14 +2,15 @@ var Creative = function() {
   this.play = function() {
     console.log('Creative.play()');
 
-    TweenLite.from(View.endFrame.tt, 0.5, { scale: 2, delay: 0 });
-    TweenLite.from(View.endFrame.background, 0.5, { scale: 2, delay: 0 });
-    TweenLite.from(View.endFrame.tuneIn, 0.5, { scale: 2, delay: 0 });
-    TweenLite.from(View.endFrame.ftm, 0.5, { scale: 2, delay: 0 });
-    TweenLite.from(View.endFrame.netflixLogo, 0.5, { scale: 2, delay: 0 });
-    TweenLite.from(View.endFrame.cta, 0.5, { scale: 2, delay: 0 });
+    var scaleTime = 1.0
+    TweenLite.from(View.endFrame.tt, scaleTime, { scale: 2, delay: 0 });
+    TweenLite.from(View.endFrame.background, scaleTime, { scale: 2, delay: 0 });
+    TweenLite.from(View.endFrame.tuneIn, scaleTime, { scale: 2, delay: 0 });
+    TweenLite.from(View.endFrame.ftm, scaleTime, { scale: 2, delay: 0 });
+    TweenLite.from(View.endFrame.netflixLogo, scaleTime, { scale: 2, delay: 0 });
+    TweenLite.from(View.endFrame.cta, scaleTime, { scale: 2, delay: 0 });
 
-    TweenLite.delayedCall(0, function() {
+    TweenLite.delayedCall(scaleTime - 0.5, function() {
       View.endFrame.netflixLogo.play();
     });
   };

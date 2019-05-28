@@ -2,7 +2,7 @@ var Creative = function() {
   this.play = function() {
     console.log('Creative.play()');
 
-    var scaleTime = 1.0
+    var scaleTime = 1.5
     TweenLite.from(View.endFrame.tt, scaleTime, { scale: 2, delay: 0 });
     TweenLite.from(View.endFrame.background, scaleTime, { scale: 2, delay: 0 });
     TweenLite.from(View.endFrame.tuneIn, scaleTime, { scale: 2, delay: 0 });

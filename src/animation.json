@@ -1,0 +1,17 @@
+{
+  "name": "Scale In",
+  "description": "Scales in all assets into view",
+  "values": [
+    {
+      "name": "SCALE_DURATION",
+      "displayName": "Scale Time",
+      "defaultValue": "1.5",
+      "description": "Scale-in duration in seconds"
+    },
+    {
+      "name": "SCALE_FACTOR",
+      "defaultValue": "2",
+      "description": "Initial scale for elements to zoom in from"
+    }
+  ]
+}

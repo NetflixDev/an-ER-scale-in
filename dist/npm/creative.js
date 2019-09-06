@@ -23,7 +23,7 @@ var Creative = function() {
     TweenLite.fromTo(View.endFrame.netflixLogo, scaleTime, { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, delay: 0 });
     TweenLite.fromTo(View.endFrame.cta, scaleTime, { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, delay: 0 });
 
-    TweenLite.delayedCall(scaleTime - 0.5, function() {
+    TweenLite.delayedCall(0, function() {
       View.endFrame.netflixLogo.play();
     });
   };

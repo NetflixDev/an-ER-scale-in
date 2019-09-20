@@ -13,12 +13,7 @@ var Creative = function() {
       scale: scaleAmount,
       delay: 0
     });
-    TweenLite.set(View.endFrame.tuneIn, {
-      opacity: 0,
-      scale: scaleAmount,
-      delay: 0
-    });
-    TweenLite.set(View.endFrame.ftm, {
+    TweenLite.set(View.endFrame.headline, {
       opacity: 0,
       scale: scaleAmount,
       delay: 0
@@ -47,8 +42,12 @@ var Creative = function() {
       { opacity: 0, scale: scaleAmount },
       { opacity: 1, scale: 1, delay: 0 }
     );
-    TweenLite.fromTo(View.endFrame.tuneIn, scaleDuration, { opacity: 0, scale: scaleAmount }, { opacity: 1, scale: 1, delay: 0 });
-    TweenLite.fromTo(View.endFrame.ftm, scaleDuration, { opacity: 0, scale: scaleAmount }, { opacity: 1, scale: 1, delay: 0 });
+    TweenLite.fromTo(
+      View.endFrame.headline,
+      scaleDuration,
+      { opacity: 0, scale: scaleAmount },
+      { opacity: 1, scale: 1, delay: 0 }
+    );
     TweenLite.fromTo(
       View.endFrame.netflixLogo,
       scaleDuration,

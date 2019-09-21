@@ -1,8 +1,19 @@
+// how long endframe scale-in animates for (in seconds)
+var scaleDuration = 1.5;
+
+// initial zoom amount before scaling elements back to original size
+var scaleAmount = 2;
+
+// how long zoom animates for (in seconds)
+var zoomDuration = 1.7;
+
+// how much to scale the keyart intro frame
+var zoomAmount = 5;
+
 var Creative = function() {
   this.init = function() {
     console.log('Creative.init()');
 
-    var scaleAmount = Creative.scaleAmount;
     TweenLite.set(View.endFrame.tt, {
       opacity: 0,
       scale: scaleAmount,
@@ -38,8 +49,6 @@ var Creative = function() {
   this.play = function() {
     console.log('Creative.play()');
 
-    var scaleAmount = Creative.scaleAmount;
-    var scaleDuration = Creative.scaleDuration;
     TweenLite.fromTo(View.endFrame.tt, scaleDuration, { opacity: 0, scale: scaleAmount }, { opacity: 1, scale: 1, delay: 0 });
     TweenLite.fromTo(
       View.endFrame.background,
@@ -63,14 +72,6 @@ var Creative = function() {
   };
 };
 
-// how long endframe scale-in animates for (in seconds)
-Creative.scaleDuration = 1.5;
-
-// initial zoom amount before scaling elements back to original size
-Creative.scaleAmount = 2;
-
-// how long zoom animates for (in seconds)
-Creative.zoomDuration = 1.7;
-
-// how much to scale the keyart intro frame
-Creative.zoomAmount = 5;
+// attaching to Creative class since container looks there for intro zoom properties
+Creative.zoomDuration = zoomDuration;
+Creative.zoomAmount = zoomAmount;

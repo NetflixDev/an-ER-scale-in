@@ -1,14 +1,14 @@
-// how long endframe scale-in animates for (in seconds)
-var SCALE_DURATION = 1.5;
-
-// initial zoom amount before scaling elements back to original size
-var SCALE_AMOUNT = 2;
-
 // how long zoom animates for (in seconds)
 var ZOOM_DURATION = 1.7;
 
 // how much to scale the keyart intro frame
 var ZOOM_AMOUNT = 5;
+
+// how long endframe scale-in animates for (in seconds)
+var SCALE_DURATION = 1.5;
+
+// initial zoom amount before scaling elements back to original size
+var SCALE_AMOUNT = 2;
 
 var Creative = function() {
   this.init = function() {

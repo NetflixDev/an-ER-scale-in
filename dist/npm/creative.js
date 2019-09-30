@@ -1,31 +1,42 @@
+// how long zoom animates for (in seconds)
+var ZOOM_DURATION = 1.7;
+
+// how much to scale the keyart intro frame
+var ZOOM_AMOUNT = 5;
+
+// how long endframe scale-in animates for (in seconds)
+var SCALE_DURATION = 1.5;
+
+// initial zoom amount before scaling elements back to original size
+var SCALE_AMOUNT = 2;
+
 var Creative = function() {
   this.init = function() {
     console.log('Creative.init()');
 
-    var scaleAmount = Creative.scaleAmount;
     TweenLite.set(View.endFrame.tt, {
       opacity: 0,
-      scale: scaleAmount,
+      scale: SCALE_AMOUNT,
       delay: 0
     });
     TweenLite.set(View.endFrame.background, {
       opacity: 0,
-      scale: scaleAmount,
+      scale: SCALE_AMOUNT,
       delay: 0
     });
     TweenLite.set(View.endFrame.headline, {
       opacity: 0,
-      scale: scaleAmount,
+      scale: SCALE_AMOUNT,
       delay: 0
     });
     TweenLite.set(View.endFrame.netflixLogo, {
       opacity: 0,
-      scale: scaleAmount,
+      scale: SCALE_AMOUNT,
       delay: 0
     });
     TweenLite.set(View.endFrame.cta, {
       opacity: 0,
-      scale: scaleAmount,
+      scale: SCALE_AMOUNT,
       delay: 0
     });
   };
@@ -33,28 +44,26 @@ var Creative = function() {
   this.play = function() {
     console.log('Creative.play()');
 
-    var scaleAmount = Creative.scaleAmount;
-    var scaleDuration = Creative.scaleDuration;
-    TweenLite.fromTo(View.endFrame.tt, scaleDuration, { opacity: 0, scale: scaleAmount }, { opacity: 1, scale: 1, delay: 0 });
+    TweenLite.fromTo(View.endFrame.tt, SCALE_DURATION, { opacity: 0, scale: SCALE_AMOUNT }, { opacity: 1, scale: 1, delay: 0 });
     TweenLite.fromTo(
       View.endFrame.background,
-      scaleDuration,
-      { opacity: 0, scale: scaleAmount },
+      SCALE_DURATION,
+      { opacity: 0, scale: SCALE_AMOUNT },
       { opacity: 1, scale: 1, delay: 0 }
     );
     TweenLite.fromTo(
       View.endFrame.headline,
-      scaleDuration,
-      { opacity: 0, scale: scaleAmount },
+      SCALE_DURATION,
+      { opacity: 0, scale: SCALE_AMOUNT },
       { opacity: 1, scale: 1, delay: 0 }
     );
     TweenLite.fromTo(
       View.endFrame.netflixLogo,
-      scaleDuration,
-      { opacity: 0, scale: scaleAmount },
+      SCALE_DURATION,
+      { opacity: 0, scale: SCALE_AMOUNT },
       { opacity: 1, scale: 1, delay: 0 }
     );
-    TweenLite.fromTo(View.endFrame.cta, scaleDuration, { opacity: 0, scale: scaleAmount }, { opacity: 1, scale: 1, delay: 0 });
+    TweenLite.fromTo(View.endFrame.cta, SCALE_DURATION, { opacity: 0, scale: SCALE_AMOUNT }, { opacity: 1, scale: 1, delay: 0 });
 
     TweenLite.delayedCall(0, function() {
       View.endFrame.netflixLogo.play();
@@ -62,14 +71,7 @@ var Creative = function() {
   };
 };
 
-// how long endframe scale-in animates for (in seconds)
-Creative.scaleDuration = 1.5;
+// attaching to Creative class since container looks there for intro zoom properties
+Creative.zoomDuration = ZOOM_DURATION;
+Creative.zoomAmount = ZOOM_AMOUNT;
 
-// initial zoom amount before scaling elements back to original size
-Creative.scaleAmount = 2;
-
-// how long zoom animates for (in seconds)
-Creative.zoomDuration = 1.7;
-
-// how much to scale the keyart intro frame
-Creative.zoomAmount = 5;
